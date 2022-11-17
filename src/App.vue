@@ -71,7 +71,7 @@ import HelloWorld from "./components/HelloWorld.vue";
       </div>
     </div>
   </header>
-  <RouterView />
+  <RouterView @sign-in="signIn"/>
 </template>
 
 <style scoped>
@@ -141,15 +141,19 @@ nav a:first-of-type {
 <script lang="ts">
 export default {
   data() {
-        return {
-            access_token: localStorage.access_token,
-        }
-    },
+    return {
+      access_token: localStorage.access_token,  
+    }
+  },
 
   methods: {
     signOut() {
       localStorage.removeItem('access_token');
-      history.go()
+      this.access_token = ''
+    },
+
+    signIn() {
+      this.access_token = localStorage.access_token
     }
   }
 }
