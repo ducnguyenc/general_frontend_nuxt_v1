@@ -38,8 +38,8 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            name: 'b',
-            email: 'b@gmail.com',
+            name: 'a',
+            email: 'a@gmail.com',
             password: 'a23456789aA!',
             passwordConfirm: 'a23456789aA!',
             errors: '',

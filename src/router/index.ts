@@ -4,6 +4,7 @@ import SignUp from "../views/SignUp.vue";
 import SignIn from "../views/SignIn.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 import ResetPassword from "../views/ResetPassword.vue";
+import EmailVerify from "../views/EmailVerify.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,13 +41,18 @@ const router = createRouter({
       path: "/reset-password/:token",
       name: "reset-password",
       component: ResetPassword,
+    },
+    {
+      path: "/email/verify/:userId/:token",
+      name: "email-verify",
+      component: EmailVerify,
     }
   ],
 });
 
 router.beforeEach((to, from) => {
   if (localStorage.access_token == undefined) {
-    let route = ['signin', 'signup', 'home', 'forgot-password', 'reset-password'];
+    let route = ['signin', 'signup', 'home', 'forgot-password', 'reset-password', 'email-verify'];
     if (route.indexOf(to.name) === -1) {
       return router.push('/signin')
     }
