@@ -3,17 +3,17 @@
     <b-card no-body>
       <b-tabs card>
         <b-tab title="Day 1">
-          <b-button class="float-right mr-4 mb-4" @click="next1()">
+          <b-button class="float-right mr-4 mb-4" @click="next()">
             <b-icon icon="chevron-right"></b-icon>
             Next
+          </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
+            ><b-icon icon="trash"></b-icon>
+            Delete
           </b-button>
           <b-button class="float-right mr-4 mb-4" @click="showFull()"
             ><b-icon icon="eye"></b-icon>
             Show
-          </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="deleteVocaAll()"
-            ><b-icon icon="trash"></b-icon>
-            Delete
           </b-button>
           <b-button class="float-right mr-4 mb-4" to="/english/create"
             ><b-icon icon="plus-circle"></b-icon>
@@ -23,7 +23,7 @@
           <b-card-text>
             <b-table
               :fields="fields"
-              :items="itemas1"
+              :items="dayFirst"
               :select-mode="selectMode"
               selectable
               @row-selected="onRowSelected"
@@ -94,7 +94,10 @@
                 >
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button v-if="!isShowAction" @click="deleteVoca(data.item.id)">
+                <b-button
+                  v-if="!isShowAction"
+                  @click="deleteVocabulary(data.item.id)"
+                >
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -107,23 +110,23 @@
         </b-tab>
 
         <b-tab title="Day 2">
-          <b-button class="float-right mr-4 mb-4">
+          <b-button class="float-right mr-4 mb-4" @click="next()">
             <b-icon icon="chevron-right"></b-icon>
             Next
           </b-button>
-          <b-button class="float-right mr-4 mb-4">
+          <b-button class="float-right mr-4 mb-4" @click="previous()">
             <b-icon icon="chevron-left"></b-icon>
             Previous
+          </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
+            ><b-icon icon="trash"></b-icon>
+            Delete
           </b-button>
           <b-button class="float-right mr-4 mb-4" @click="showFull()"
             ><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4"
-            ><b-icon icon="trash"></b-icon>
-            Delete
-          </b-button>
-          <b-button class="float-right mr-4 mb-4"
+          <b-button class="float-right mr-4 mb-4" to="/english/create"
             ><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
@@ -131,7 +134,7 @@
           <b-card-text>
             <b-table
               :fields="fields"
-              :items="itemas2"
+              :items="daySecond"
               :select-mode="selectMode"
               selectable
               @row-selected="onRowSelected"
@@ -176,6 +179,11 @@
                   "
                 />
               </template>
+              <template #cell(spell)="data">
+                <p v-if="[0, 2].includes(data.item.status) || isShowTable">
+                  {{ data.value }}
+                </p>
+              </template>
               <template #cell(vietnamese)="data">
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
@@ -191,10 +199,16 @@
                 />
               </template>
               <template #cell(action)="data">
-                <b-button v-if="!isShowAction">
+                <b-button
+                  v-if="!isShowAction"
+                  :to="`/english/` + data.item.id + `/update`"
+                >
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button v-if="!isShowAction">
+                <b-button
+                  v-if="!isShowAction"
+                  @click="deleteVocabulary(data.item.id)"
+                >
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -207,30 +221,31 @@
         </b-tab>
 
         <b-tab title="Day 3">
-          <b-button class="float-right mr-4 mb-4">
+          <b-button class="float-right mr-4 mb-4" @click="next()">
             <b-icon icon="chevron-right"></b-icon>
             Next
           </b-button>
-          <b-button class="float-right mr-4 mb-4">
+          <b-button class="float-right mr-4 mb-4" @click="previous()">
             <b-icon icon="chevron-left"></b-icon>
             Previous
+          </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
+            ><b-icon icon="trash"></b-icon>
+            Delete
           </b-button>
           <b-button class="float-right mr-4 mb-4" @click="showFull()"
             ><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4"
-            ><b-icon icon="trash"></b-icon>
-            Delete
-          </b-button>
-          <b-button class="float-right mr-4 mb-4"
+          <b-button class="float-right mr-4 mb-4" to="/english/create"
             ><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
+
           <b-card-text>
             <b-table
               :fields="fields"
-              :items="itemas3"
+              :items="dayThird"
               :select-mode="selectMode"
               selectable
               @row-selected="onRowSelected"
@@ -275,6 +290,11 @@
                   "
                 />
               </template>
+              <template #cell(spell)="data">
+                <p v-if="[0, 2].includes(data.item.status) || isShowTable">
+                  {{ data.value }}
+                </p>
+              </template>
               <template #cell(vietnamese)="data">
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
@@ -290,10 +310,16 @@
                 />
               </template>
               <template #cell(action)="data">
-                <b-button v-if="!isShowAction">
+                <b-button
+                  v-if="!isShowAction"
+                  :to="`/english/` + data.item.id + `/update`"
+                >
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button v-if="!isShowAction">
+                <b-button
+                  v-if="!isShowAction"
+                  @click="deleteVocabulary(data.item.id)"
+                >
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -306,23 +332,23 @@
         </b-tab>
 
         <b-tab title="Day 4">
-          <b-button class="float-right mr-4 mb-4">
+          <b-button class="float-right mr-4 mb-4" @click="next()">
             <b-icon icon="chevron-right"></b-icon>
             Next
           </b-button>
-          <b-button class="float-right mr-4 mb-4">
+          <b-button class="float-right mr-4 mb-4" @click="previous()">
             <b-icon icon="chevron-left"></b-icon>
             Previous
+          </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
+            ><b-icon icon="trash"></b-icon>
+            Delete
           </b-button>
           <b-button class="float-right mr-4 mb-4" @click="showFull()"
             ><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4"
-            ><b-icon icon="trash"></b-icon>
-            Delete
-          </b-button>
-          <b-button class="float-right mr-4 mb-4"
+          <b-button class="float-right mr-4 mb-4" to="/english/create"
             ><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
@@ -330,7 +356,7 @@
           <b-card-text>
             <b-table
               :fields="fields"
-              :items="itemas4"
+              :items="dayFourth"
               :select-mode="selectMode"
               selectable
               @row-selected="onRowSelected"
@@ -375,6 +401,11 @@
                   "
                 />
               </template>
+              <template #cell(spell)="data">
+                <p v-if="[0, 2].includes(data.item.status) || isShowTable">
+                  {{ data.value }}
+                </p>
+              </template>
               <template #cell(vietnamese)="data">
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
@@ -390,10 +421,16 @@
                 />
               </template>
               <template #cell(action)="data">
-                <b-button v-if="!isShowAction">
+                <b-button
+                  v-if="!isShowAction"
+                  :to="`/english/` + data.item.id + `/update`"
+                >
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button v-if="!isShowAction">
+                <b-button
+                  v-if="!isShowAction"
+                  @click="deleteVocabulary(data.item.id)"
+                >
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -406,19 +443,19 @@
         </b-tab>
 
         <b-tab title="Day 5">
-          <b-button class="float-right mr-4 mb-4">
+          <b-button class="float-right mr-4 mb-4" @click="previous()">
             <b-icon icon="chevron-left"></b-icon>
             Previous
+          </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
+            ><b-icon icon="trash"></b-icon>
+            Delete
           </b-button>
           <b-button class="float-right mr-4 mb-4" @click="showFull()"
             ><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4"
-            ><b-icon icon="trash"></b-icon>
-            Delete
-          </b-button>
-          <b-button class="float-right mr-4 mb-4"
+          <b-button class="float-right mr-4 mb-4" to="/english/create"
             ><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
@@ -426,7 +463,7 @@
           <b-card-text>
             <b-table
               :fields="fields"
-              :items="itemas5"
+              :items="dayFiveth"
               :select-mode="selectMode"
               selectable
               @row-selected="onRowSelected"
@@ -471,6 +508,11 @@
                   "
                 />
               </template>
+              <template #cell(spell)="data">
+                <p v-if="[0, 2].includes(data.item.status) || isShowTable">
+                  {{ data.value }}
+                </p>
+              </template>
               <template #cell(vietnamese)="data">
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
@@ -486,10 +528,16 @@
                 />
               </template>
               <template #cell(action)="data">
-                <b-button v-if="!isShowAction">
+                <b-button
+                  v-if="!isShowAction"
+                  :to="`/english/` + data.item.id + `/update`"
+                >
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button v-if="!isShowAction">
+                <b-button
+                  v-if="!isShowAction"
+                  @click="deleteVocabulary(data.item.id)"
+                >
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -524,33 +572,11 @@ export default {
         { key: "vietnamese" },
         { key: "action" },
       ],
-      itemas1: [],
-      // itemas1: [
-      //   {
-      //     id: 2,
-      //     english: 40,
-      //     spell: "Dickerson",
-      //     vietnam: "Macdonald",
-      //     status: 0,
-      //   },
-      //   { id: 345, english: 21, spell: "Larsen", vietnam: "Shaw", status: 0 },
-      //   { id: 23, english: 89, spell: "Geneva", vietnam: "Wilson", status: 1 },
-      //   { id: 24, english: 38, spell: "Jami", vietnam: "Carney", status: 0 },
-      // ],
-      itemas2: [
-        { english: 89, spell: "Geneva", vietnam: "Wilson" },
-        { english: 38, spell: "Jami", vietnam: "Carney" },
-      ],
-      itemas3: [
-        { english: 38, spell: "Jami", vietnam: "Carney" },
-        { english: 38, spell: "Jami", vietnam: "Carney" },
-      ],
-      itemas4: [{ english: 38, spell: "Jami", vietnam: "Carney" }],
-      itemas5: [
-        { english: 89, spell: "Geneva", vietnam: "Wilson" },
-        { english: 89, spell: "Geneva", vietnam: "Wilson" },
-        { english: 38, spell: "Jami", vietnam: "Carney" },
-      ],
+      dayFirst: [],
+      daySecond: [],
+      dayThird: [],
+      dayFourth: [],
+      dayFiveth: [],
     };
   },
 
@@ -563,26 +589,29 @@ export default {
       const response = await this.$axios.$get(
         "http://localhost:8000/api/english/vocabulary"
       );
-      this.itemas1 = JSON.parse(response[1][0]);
+      this.dayFirst = JSON.parse(response[1][0]);
+      this.daySecond = JSON.parse(response[2][1]);
+      this.dayThird = JSON.parse(response[3][1]);
+      this.dayFourth = JSON.parse(response[4][1]);
+      this.dayFiveth = JSON.parse(response[5][1]);
     },
 
-    async deleteVoca(id) {
+    async deleteVocabulary(id) {
       const response = await this.$axios.$delete(
         "http://localhost:8000/api/english/vocabulary/" + id
       );
     },
 
-    async deleteVocaAll() {
+    async deleteAllVocabulary() {
       const response = await this.$axios.$post(
         "http://localhost:8000/api/english/vocabulary/delete"
       );
     },
 
-    async next1(id) {
-      
+    async next() {
       const response = await this.$axios.$post(
-        "http://localhost:8000/api/english/vocabulary/forward", 
-          this.selected
+        "http://localhost:8000/api/english/vocabulary/forward",
+        this.selected
       );
     },
 
