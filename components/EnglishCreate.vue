@@ -55,8 +55,6 @@ export default {
         "http://localhost:8000/api/english/vocabulary",
         this.form
       );
-      // this.itemas1 = JSON.parse(response[1][0]);
-      // alert(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();

@@ -3,7 +3,7 @@
     <b-card no-body>
       <b-tabs card>
         <b-tab title="Day 1">
-          <b-button class="float-right mr-4 mb-4">
+          <b-button class="float-right mr-4 mb-4" @click="next1()">
             <b-icon icon="chevron-right"></b-icon>
             Next
           </b-button>
@@ -11,7 +11,7 @@
             ><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4"
+          <b-button class="float-right mr-4 mb-4" @click="deleteVocaAll()"
             ><b-icon icon="trash"></b-icon>
             Delete
           </b-button>
@@ -569,6 +569,20 @@ export default {
     async deleteVoca(id) {
       const response = await this.$axios.$delete(
         "http://localhost:8000/api/english/vocabulary/" + id
+      );
+    },
+
+    async deleteVocaAll() {
+      const response = await this.$axios.$post(
+        "http://localhost:8000/api/english/vocabulary/delete"
+      );
+    },
+
+    async next1(id) {
+      
+      const response = await this.$axios.$post(
+        "http://localhost:8000/api/english/vocabulary/forward", 
+          this.selected
       );
     },
 

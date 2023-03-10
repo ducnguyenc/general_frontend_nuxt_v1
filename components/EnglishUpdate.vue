@@ -13,7 +13,7 @@
       <b-form-group id="input-group-2" label="Vietnamese:" label-for="input-2">
         <b-form-input
           id="input-2"
-          v-model="form.vietnam"
+          v-model="form.vietnamese"
           placeholder="Enter vietnamese"
           required
         ></b-form-input>
@@ -43,20 +43,32 @@ export default {
     return {
       form: {
         english: "",
-        vietnam: "",
+        vietnamese: "",
         example: "",
       },
     };
   },
+  mounted() {
+    this.fetchSomething();
+  },
   methods: {
-    onSubmit(event) {
+    async fetchSomething() {
+      const response = await this.$axios.$get(
+        "http://localhost:8000/api/english/vocabulary/" + this.$route.params.id
+      );
+      this.form = response;
+    },
+    async onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      const response = await this.$axios.$put(
+        "http://localhost:8000/api/english/vocabulary/" + this.$route.params.id,
+        this.form
+      );
     },
     onReset(event) {
       event.preventDefault();
       this.form.english = "";
-      this.form.vietnam = "";
+      this.form.vietnamese = "";
       this.form.example = "";
     },
   },
