@@ -8,6 +8,9 @@
         <b-navbar-nav>
           <b-nav-item to="/english">English</b-nav-item>
         </b-navbar-nav>
+        <b-navbar-nav>
+          <b-nav-item to="/test">Test</b-nav-item>
+        </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
