@@ -581,31 +581,38 @@ export default {
   },
 
   mounted() {
-    this.fetchSomething();
+    this.fetchVocabulary();
   },
 
   methods: {
-    async fetchSomething() {
+    async fetchVocabulary() {
       const response = await this.$axios.$get(
         "http://localhost:8000/api/english/vocabulary"
       );
-      this.dayFirst = JSON.parse(response[1][0]);
-      this.daySecond = JSON.parse(response[2][1]);
-      this.dayThird = JSON.parse(response[3][1]);
-      this.dayFourth = JSON.parse(response[4][1]);
-      this.dayFiveth = JSON.parse(response[5][1]);
+      this.dayFirst = JSON.parse(response[1]);
+      this.daySecond = JSON.parse(response[2]);
+      this.dayThird = JSON.parse(response[3]);
+      this.dayFourth = JSON.parse(response[4]);
+      this.dayFiveth = JSON.parse(response[5]);
     },
 
     async deleteVocabulary(id) {
       const response = await this.$axios.$delete(
         "http://localhost:8000/api/english/vocabulary/" + id
       );
+      if (response) {
+        this.fetchVocabulary()
+      }
     },
 
     async deleteAllVocabulary() {
       const response = await this.$axios.$post(
-        "http://localhost:8000/api/english/vocabulary/delete"
+        "http://localhost:8000/api/english/vocabulary/delete",
+        this.selected
       );
+      if (response) {
+        this.fetchVocabulary()
+      }
     },
 
     async next() {
@@ -613,6 +620,9 @@ export default {
         "http://localhost:8000/api/english/vocabulary/forward",
         this.selected
       );
+      if (response) {
+        this.fetchVocabulary()
+      }
     },
 
     onRowSelected(items) {

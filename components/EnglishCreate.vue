@@ -55,6 +55,9 @@ export default {
         "http://localhost:8000/api/english/vocabulary",
         this.form
       );
+      if (response) {
+        this.$router.go(-1);
+      }
     },
     onReset(event) {
       event.preventDefault();
