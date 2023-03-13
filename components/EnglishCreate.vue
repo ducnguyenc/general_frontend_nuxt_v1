@@ -24,7 +24,6 @@
           id="input-2"
           v-model="form.example"
           placeholder="Enter example"
-          required
         ></b-form-input>
       </b-form-group>
 
@@ -56,7 +55,7 @@ export default {
         this.form
       );
       if (response) {
-        this.$router.go(-1);
+        this.$router.push({ path: "/english" });
       }
     },
     onReset(event) {

@@ -24,7 +24,6 @@
           id="input-2"
           v-model="form.example"
           placeholder="Enter example"
-          required
         ></b-form-input>
       </b-form-group>
 
@@ -64,6 +63,9 @@ export default {
         "http://localhost:8000/api/english/vocabulary/" + this.$route.params.id,
         this.form
       );
+      if (response) {
+        this.$router.push({ path: "/english" });
+      }
     },
     onReset(event) {
       event.preventDefault();
