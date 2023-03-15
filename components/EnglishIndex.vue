@@ -560,8 +560,31 @@
         </b-tab>
       </b-tabs>
     </b-card>
+    <div class="test">
+      <b-row align-h="around">
+        <b-col><b-form-input v-model="input.first"></b-form-input></b-col>
+        <b-col><b-form-input v-model="input.second"></b-form-input></b-col>
+        <b-col><b-form-input v-model="input.third"></b-form-input></b-col>
+        <b-col><b-form-input v-model="input.fourth"></b-form-input></b-col>
+        <b-col><b-form-input v-model="input.fiveth"></b-form-input></b-col>
+        <b-col><b-button block @click="reset">Reset</b-button></b-col>
+      </b-row>
+    </div>
   </b-container>
 </template>
+
+<style scoped>
+.test {
+  position: fixed;
+  left: 0;
+  bottom: 24px;
+  width: 100%;
+  color: white;
+  background-color: #17a2b8;
+  border-top: 1px solid #17a2b8;
+  text-align: center;
+}
+</style>
 
 <script>
 export default {
@@ -588,6 +611,13 @@ export default {
       dayThird: [],
       dayFourth: [],
       dayFiveth: [],
+      input: {
+        first: "",
+        second: "",
+        third: "",
+        fourth: "",
+        fiveth: "",
+      },
     };
   },
 
@@ -661,6 +691,13 @@ export default {
     shuffle() {
       this.statusShuffle = this.statusShuffle ? 0 : 1;
       this.fetchVocabulary();
+    },
+    reset() {
+      this.input.first = "";
+      this.input.second = "";
+      this.input.third = "";
+      this.input.fourth = "";
+      this.input.fiveth = "";
     },
   },
 };
