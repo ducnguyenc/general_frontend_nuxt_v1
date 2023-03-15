@@ -7,6 +7,16 @@
             <b-icon icon="chevron-right"></b-icon>
             Next
           </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="shuffle()">
+            <div v-if="statusShuffle == true">
+              <b-icon icon="shuffle"> </b-icon>
+              Origin
+            </div>
+            <div v-if="statusShuffle == false">
+              <b-icon icon="shuffle"> </b-icon>
+              Shuffle
+            </div>
+          </b-button>
           <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
             ><b-icon icon="trash"></b-icon>
             Delete
@@ -560,6 +570,7 @@ export default {
   data() {
     return {
       statusTemp: [],
+      statusShuffle: true,
       isShowAction: false,
       isShowTable: false,
       selectMode: "multi",
@@ -587,13 +598,18 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "http://localhost:8000/api/english/vocabulary"
+        "http://localhost:8000/api/english/vocabulary",
+        {
+          params: {
+            status_shuffle: this.statusShuffle,
+          },
+        }
       );
-      this.dayFirst = JSON.parse(response[1]);
-      this.daySecond = JSON.parse(response[2]);
-      this.dayThird = JSON.parse(response[3]);
-      this.dayFourth = JSON.parse(response[4]);
-      this.dayFiveth = JSON.parse(response[5]);
+      this.dayFirst = response[1];
+      this.daySecond = response[2];
+      this.dayThird = response[3];
+      this.dayFourth = response[4];
+      this.dayFiveth = response[5];
     },
 
     async deleteVocabulary(id) {
@@ -601,7 +617,7 @@ export default {
         "http://localhost:8000/api/english/vocabulary/" + id
       );
       if (response) {
-        this.fetchVocabulary()
+        this.fetchVocabulary();
       }
     },
 
@@ -611,7 +627,7 @@ export default {
         this.selected
       );
       if (response) {
-        this.fetchVocabulary()
+        this.fetchVocabulary();
       }
     },
 
@@ -621,7 +637,7 @@ export default {
         this.selected
       );
       if (response) {
-        this.fetchVocabulary()
+        this.fetchVocabulary();
       }
     },
 
@@ -641,6 +657,10 @@ export default {
       } else {
         data.item.status = this.statusTemp[data.index];
       }
+    },
+    shuffle() {
+      this.statusShuffle = this.statusShuffle ? 0 : 1;
+      this.fetchVocabulary();
     },
   },
 };
