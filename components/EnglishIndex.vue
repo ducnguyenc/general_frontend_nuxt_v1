@@ -634,6 +634,7 @@ export default {
         { key: "english" },
         { key: "spell" },
         { key: "vietnamese" },
+        { key: "example" },
         { key: "action" },
       ],
       dayFirst: [],
