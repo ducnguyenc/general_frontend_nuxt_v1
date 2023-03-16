@@ -128,6 +128,16 @@
             <b-icon icon="chevron-left"></b-icon>
             Previous
           </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="shuffle()">
+            <div v-if="statusShuffle == true">
+              <b-icon icon="shuffle"> </b-icon>
+              Origin
+            </div>
+            <div v-if="statusShuffle == false">
+              <b-icon icon="shuffle"> </b-icon>
+              Shuffle
+            </div>
+          </b-button>
           <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
             ><b-icon icon="trash"></b-icon>
             Delete
@@ -238,6 +248,16 @@
           <b-button class="float-right mr-4 mb-4" @click="previous()">
             <b-icon icon="chevron-left"></b-icon>
             Previous
+          </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="shuffle()">
+            <div v-if="statusShuffle == true">
+              <b-icon icon="shuffle"> </b-icon>
+              Origin
+            </div>
+            <div v-if="statusShuffle == false">
+              <b-icon icon="shuffle"> </b-icon>
+              Shuffle
+            </div>
           </b-button>
           <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
             ><b-icon icon="trash"></b-icon>
@@ -350,6 +370,16 @@
             <b-icon icon="chevron-left"></b-icon>
             Previous
           </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="shuffle()">
+            <div v-if="statusShuffle == true">
+              <b-icon icon="shuffle"> </b-icon>
+              Origin
+            </div>
+            <div v-if="statusShuffle == false">
+              <b-icon icon="shuffle"> </b-icon>
+              Shuffle
+            </div>
+          </b-button>
           <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
             ><b-icon icon="trash"></b-icon>
             Delete
@@ -457,6 +487,16 @@
             <b-icon icon="chevron-left"></b-icon>
             Previous
           </b-button>
+          <b-button class="float-right mr-4 mb-4" @click="shuffle()">
+            <div v-if="statusShuffle == true">
+              <b-icon icon="shuffle"> </b-icon>
+              Origin
+            </div>
+            <div v-if="statusShuffle == false">
+              <b-icon icon="shuffle"> </b-icon>
+              Shuffle
+            </div>
+          </b-button>
           <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
             ><b-icon icon="trash"></b-icon>
             Delete
@@ -560,16 +600,6 @@
         </b-tab>
       </b-tabs>
     </b-card>
-    <div class="test">
-      <b-row align-h="around">
-        <b-col><b-form-input v-model="input.first"></b-form-input></b-col>
-        <b-col><b-form-input v-model="input.second"></b-form-input></b-col>
-        <b-col><b-form-input v-model="input.third"></b-form-input></b-col>
-        <b-col><b-form-input v-model="input.fourth"></b-form-input></b-col>
-        <b-col><b-form-input v-model="input.fiveth"></b-form-input></b-col>
-        <b-col><b-button block @click="reset">Reset</b-button></b-col>
-      </b-row>
-    </div>
   </b-container>
 </template>
 
@@ -611,13 +641,7 @@ export default {
       dayThird: [],
       dayFourth: [],
       dayFiveth: [],
-      input: {
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-        fiveth: "",
-      },
+      
     };
   },
 
@@ -640,6 +664,11 @@ export default {
       this.dayThird = response[3];
       this.dayFourth = response[4];
       this.dayFiveth = response[5];
+      this.setStatusTemp(this.dayFirst);
+      this.setStatusTemp(this.daySecond);
+      this.setStatusTemp(this.dayThird);
+      this.setStatusTemp(this.dayFourth);
+      this.setStatusTemp(this.dayFiveth);
     },
 
     async deleteVocabulary(id) {
@@ -682,10 +711,10 @@ export default {
     },
     changeStatus(data) {
       if (data.item.status != 2) {
-        this.statusTemp[data.index] = data.item.status;
+        this.statusTemp[data.item.id] = data.item.status;
         data.item.status = 2;
       } else {
-        data.item.status = this.statusTemp[data.index];
+        data.item.status = this.statusTemp[data.item.id];
       }
     },
     shuffle() {
@@ -698,6 +727,11 @@ export default {
       this.input.third = "";
       this.input.fourth = "";
       this.input.fiveth = "";
+    },
+    setStatusTemp(data) {
+      data.forEach((element) => {
+        this.statusTemp[element.id] = element.status;
+      });
     },
   },
 };
