@@ -603,19 +603,6 @@
   </b-container>
 </template>
 
-<style scoped>
-.test {
-  position: fixed;
-  left: 0;
-  bottom: 24px;
-  width: 100%;
-  color: white;
-  background-color: #17a2b8;
-  border-top: 1px solid #17a2b8;
-  text-align: center;
-}
-</style>
-
 <script>
 export default {
   name: "EnglishIndex",
