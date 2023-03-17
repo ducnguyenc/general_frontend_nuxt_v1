@@ -3,27 +3,44 @@
     <b-card no-body>
       <b-tabs card>
         <b-tab title="Day 1">
-          <b-form @submit="onsubmit" class="text-center">
-            <div>{{ vocabulary }}</div>
-            <div class="d-flex justify-content-center">
-              <b-form-input autofocus class="w-25" v-model="text" placeholder="Enter your name"></b-form-input>
-            </div>
-            <div v-if="status" class="mb-3">
-              {{ vocabularyOk.english }}
-              {{ vocabularyOk.spell }}
-              {{ vocabularyOk.vietnamese }}
-            </div>
+          <b-form
+            @submit="onsubmit($event, dayFirst, 1)"
+            inline
+            class="mb-2 justify-content-center"
+          >
+            <span hidden>{{ test }}</span>
+            <label class="mr-sm-2">{{ wordShow[1] }}</label>
+            <b-form-input
+              class="mb-2 mr-sm-2 mb-sm-0"
+              autofocus
+              v-model="text[1]"
+            ></b-form-input>
             <b-button type="submit" variant="primary">Submit</b-button>
           </b-form>
+
+          <b-table-simple hover responsive>
+            <b-thead head-variant="light">
+              <b-tr>
+                <b-th>English</b-th>
+                <b-th>Spell</b-th>
+                <b-th>Vietnamese</b-th>
+                <b-th>Example</b-th>
+              </b-tr>
+            </b-thead>
+            <b-tbody>
+              <b-tr v-if="status[1] == true">
+                <b-td>{{ vocabulary[1].english }}</b-td>
+                <b-td> {{ vocabulary[1].spell }} </b-td>
+                <b-td> {{ vocabulary[1].vietnamese }} </b-td>
+                <b-td> {{ vocabulary[1].example }} </b-td>
+              </b-tr>
+            </b-tbody>
+          </b-table-simple>
         </b-tab>
-        <b-tab title="Day 2">
-        </b-tab>
-        <b-tab title="Day 3">
-        </b-tab>
-        <b-tab title="Day 4">
-        </b-tab>
-        <b-tab title="Day 5">
-        </b-tab>
+        <b-tab title="Day 2"> </b-tab>
+        <b-tab title="Day 3"> </b-tab>
+        <b-tab title="Day 4"> </b-tab>
+        <b-tab title="Day 5"> </b-tab>
       </b-tabs>
     </b-card>
   </b-container>
@@ -35,18 +52,26 @@ export default {
 
   data() {
     return {
-      status: false,
-      text: '',
-      vocabulary: '',
-      vocabularyOk: '',
-      vocabularyOkchua: '',
+      status: {
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+      },
+      statusWord: {},
+      text: {},
+      wordShow: {},
+      wordHide: {},
+      vocabulary: {},
       statusShuffle: true,
-      fields: ['english', 'spell', 'vietnamese'],
+      fields: ["english", "spell", "vietnamese"],
       dayFirst: [],
       daySecond: [],
       dayThird: [],
       dayFourth: [],
       dayFiveth: [],
+      test: 1,
     };
   },
 
@@ -69,36 +94,45 @@ export default {
       this.dayThird = response[3];
       this.dayFourth = response[4];
       this.dayFiveth = response[5];
-      this.genVocabulary()
+      this.test = 2;
+      this.genVocabulary(this.dayFirst, 1);
+      this.genVocabulary(this.daySecond, 2);
+      this.genVocabulary(this.dayThird, 3);
+      this.genVocabulary(this.dayFourth, 4);
+      this.genVocabulary(this.dayFiveth, 5);
     },
-    genVocabulary() {
-      if (this.dayFirst.length == 0) {
-        this.vocabulary = 'het me roi'
+    genVocabulary(vocabularyDay, day) {
+      if (vocabularyDay.length == 0) {
+        this.wordShow[day] = "het me roi";
       } else {
-        if (this.dayFirst[0]['status'] == 0) {
-          this.vocabulary = this.dayFirst[0]['english']
-          this.vocabularyOkchua = this.dayFirst[0]['vietnamese']
+        this.statusWord[day] = Math.floor(Math.random() * 2);
+        if (this.statusWord[day] == 0) {
+          this.test = 3;
+          this.wordShow[day] = vocabularyDay[0]["english"];
+          this.wordHide[day] = vocabularyDay[0]["vietnamese"];
         } else {
-          this.vocabulary = this.dayFirst[0]['vietnamese']
-          this.vocabularyOkchua = this.dayFirst[0]['english']
+          this.test = 4;
+          this.wordShow[day] = vocabularyDay[0]["vietnamese"];
+          this.wordHide[day] = vocabularyDay[0]["english"];
         }
-        this.vocabularyOk = this.dayFirst[0]
+        this.vocabulary[day] = vocabularyDay[0];
+        this.test = 5;
       }
     },
-    onsubmit(event) {
-      event.preventDefault()
-      if (!this.status && this.text == this.vocabularyOkchua) {
-        this.status = true
-        this.dayFirst.shift()
+    onsubmit(event, vocabularyDay, day) {
+      event.preventDefault();
+      if (!this.status[day] && this.text[day] == this.wordHide[day]) {
+        this.status[day] = true;
+        vocabularyDay.shift();
       } else {
-        this.status = false
-        const temp = this.dayFirst[0]
-        this.dayFirst.shift()
-        this.dayFirst.push(temp)
-        this.text = ''
-        this.genVocabulary()
+        this.status[day] = false;
+        const temp = vocabularyDay[0];
+        vocabularyDay.shift();
+        vocabularyDay.push(temp);
+        this.text[day] = null;
+        this.genVocabulary(vocabularyDay, day);
       }
-    }
+    },
   },
 };
 </script>
