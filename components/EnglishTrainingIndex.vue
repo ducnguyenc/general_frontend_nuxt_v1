@@ -6,16 +6,28 @@
           <b-form
             @submit="onsubmit($event, dayFirst, 1)"
             inline
-            class="mb-2 justify-content-center"
+            class="mb-2 justify-content-around"
           >
-            <span hidden>{{ test }}</span>
-            <label class="mr-sm-2">{{ wordShow[1] }}</label>
-            <b-form-input
-              class="mb-2 mr-sm-2 mb-sm-0"
-              autofocus
-              v-model="text[1]"
-            ></b-form-input>
-            <b-button type="submit" variant="primary">Submit</b-button>
+            <div class="d-flex">
+              <span hidden>{{ test }}</span>
+              <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                wordShow[1]
+              }}</label>
+              <b-form-input
+                class="mb-2 mr-sm-2 mb-sm-0"
+                autofocus
+                v-model="text[1]"
+              ></b-form-input>
+              <b-button type="submit" variant="primary">Submit</b-button>
+            </div>
+            <div>
+              <b-form-select
+                v-model="selected[1]"
+                :options="selects"
+                value="null"
+                @change="genVocabulary(dayFirst, 1)"
+              ></b-form-select>
+            </div>
           </b-form>
 
           <b-table-simple hover responsive>
@@ -72,6 +84,19 @@ export default {
       dayFourth: [],
       dayFiveth: [],
       test: 1,
+      color: "",
+      selected: {
+        1: null,
+        2: null,
+        3: null,
+        4: null,
+        5: null,
+      },
+      selects: [
+        { value: null, text: "Shuffer" },
+        { value: 0, text: "English" },
+        { value: 1, text: "Vietnamese" },
+      ],
     };
   },
 
@@ -105,7 +130,8 @@ export default {
       if (vocabularyDay.length == 0) {
         this.wordShow[day] = "het me roi";
       } else {
-        this.statusWord[day] = Math.floor(Math.random() * 2);
+        this.statusWord[day] =
+          this.selected[day] ?? Math.floor(Math.random() * 2);
         if (this.statusWord[day] == 0) {
           this.test = 3;
           this.wordShow[day] = vocabularyDay[0]["english"];
@@ -122,15 +148,22 @@ export default {
     onsubmit(event, vocabularyDay, day) {
       event.preventDefault();
       if (this.status[day]) {
-        if (this.text[day] == this.wordHide[day]) {
+        if (this.wordHide[day].includes(this.text[day])) {
           vocabularyDay.shift();
         } else {
           const temp = vocabularyDay[0];
           vocabularyDay.shift();
           vocabularyDay.push(temp);
         }
+        this.color = "text-dark";
         this.text[day] = null;
         this.genVocabulary(vocabularyDay, day);
+      } else {
+        if (this.wordHide[day].includes(this.text[day])) {
+          this.color = "text-success";
+        } else {
+          this.color = "text-danger";
+        }
       }
       this.status[day] = !this.status[day];
     },
