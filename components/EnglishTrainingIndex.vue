@@ -121,17 +121,18 @@ export default {
     },
     onsubmit(event, vocabularyDay, day) {
       event.preventDefault();
-      if (!this.status[day] && this.text[day] == this.wordHide[day]) {
-        this.status[day] = true;
-        vocabularyDay.shift();
-      } else {
-        this.status[day] = false;
-        const temp = vocabularyDay[0];
-        vocabularyDay.shift();
-        vocabularyDay.push(temp);
+      if (this.status[day]) {
+        if (this.text[day] == this.wordHide[day]) {
+          vocabularyDay.shift();
+        } else {
+          const temp = vocabularyDay[0];
+          vocabularyDay.shift();
+          vocabularyDay.push(temp);
+        }
         this.text[day] = null;
         this.genVocabulary(vocabularyDay, day);
       }
+      this.status[day] = !this.status[day];
     },
   },
 };
