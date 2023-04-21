@@ -12,6 +12,12 @@
           <b-nav-item to="/english_training">English Training</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
+          <b-nav-item to="/japanese">Japanese</b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav>
+          <b-nav-item to="/japanese_training">Japanese Training</b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav>
           <b-nav-item to="/test">Test</b-nav-item>
         </b-navbar-nav>
 

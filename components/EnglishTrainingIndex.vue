@@ -343,7 +343,7 @@ export default {
     },
     genVocabulary(vocabularyDay, day) {
       if (vocabularyDay.length == 0) {
-        this.wordShow[day] = "het me roi";
+        this.wordShow[day] = "hết mất tiêu";
       } else {
         this.statusWord[day] =
           this.selected[day] ?? Math.floor(Math.random() * 2);

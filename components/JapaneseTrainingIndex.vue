@@ -46,7 +46,7 @@
             </b-thead>
             <b-tbody>
               <b-tr v-if="status[1] == true">
-                <b-td>{{ vocabulary[1].english }}</b-td>
+                <b-td>{{ vocabulary[1].japanese }}</b-td>
                 <b-td> {{ vocabulary[1].spell }} </b-td>
                 <b-td> {{ vocabulary[1].vietnamese }} </b-td>
                 <b-td> {{ vocabulary[1].example }} </b-td>
@@ -98,7 +98,7 @@
             </b-thead>
             <b-tbody>
               <b-tr v-if="status[2] == true">
-                <b-td>{{ vocabulary[2].english }}</b-td>
+                <b-td>{{ vocabulary[2].japanese }}</b-td>
                 <b-td> {{ vocabulary[2].spell }} </b-td>
                 <b-td> {{ vocabulary[2].vietnamese }} </b-td>
                 <b-td> {{ vocabulary[2].example }} </b-td>
@@ -150,7 +150,7 @@
             </b-thead>
             <b-tbody>
               <b-tr v-if="status[3] == true">
-                <b-td>{{ vocabulary[3].english }}</b-td>
+                <b-td>{{ vocabulary[3].japanese }}</b-td>
                 <b-td> {{ vocabulary[3].spell }} </b-td>
                 <b-td> {{ vocabulary[3].vietnamese }} </b-td>
                 <b-td> {{ vocabulary[3].example }} </b-td>
@@ -202,7 +202,7 @@
             </b-thead>
             <b-tbody>
               <b-tr v-if="status[4] == true">
-                <b-td>{{ vocabulary[4].english }}</b-td>
+                <b-td>{{ vocabulary[4].japanese }}</b-td>
                 <b-td> {{ vocabulary[4].spell }} </b-td>
                 <b-td> {{ vocabulary[4].vietnamese }} </b-td>
                 <b-td> {{ vocabulary[4].example }} </b-td>
@@ -254,7 +254,7 @@
             </b-thead>
             <b-tbody>
               <b-tr v-if="status[5] == true">
-                <b-td>{{ vocabulary[5].english }}</b-td>
+                <b-td>{{ vocabulary[5].japanese }}</b-td>
                 <b-td> {{ vocabulary[5].spell }} </b-td>
                 <b-td> {{ vocabulary[5].vietnamese }} </b-td>
                 <b-td> {{ vocabulary[5].example }} </b-td>
@@ -286,7 +286,7 @@ export default {
       wordHide: {},
       vocabulary: {},
       statusShuffle: true,
-      fields: ["english", "spell", "vietnamese"],
+      fields: ["japanese", "spell", "vietnamese"],
       dayFirst: [],
       daySecond: [],
       dayThird: [],
@@ -317,7 +317,7 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "http://localhost:8000/api/english/vocabulary",
+        "http://localhost:8000/api/japanese/vocabulary",
         {
           params: {
             status_shuffle: this.statusShuffle,
@@ -343,18 +343,18 @@ export default {
     },
     genVocabulary(vocabularyDay, day) {
       if (vocabularyDay.length == 0) {
-        this.wordShow[day] = "het me roi";
+        this.wordShow[day] = "hết mất tiêu";
       } else {
         this.statusWord[day] =
           this.selected[day] ?? Math.floor(Math.random() * 2);
         if (this.statusWord[day] == 0) {
           this.test = 3;
-          this.wordShow[day] = vocabularyDay[0]["english"];
+          this.wordShow[day] = vocabularyDay[0]["japanese"];
           this.wordHide[day] = vocabularyDay[0]["vietnamese"];
         } else {
           this.test = 4;
           this.wordShow[day] = vocabularyDay[0]["vietnamese"];
-          this.wordHide[day] = vocabularyDay[0]["english"];
+          this.wordHide[day] = vocabularyDay[0]["japanese"];
         }
         this.vocabulary[day] = vocabularyDay[0];
         this.test = 5;
