@@ -10,6 +10,15 @@
         ></b-form-input>
       </b-form-group>
 
+      <b-form-group id="input-group-2" label="Spell:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="form.spell"
+          placeholder="Enter spell"
+          required
+        ></b-form-input>
+      </b-form-group>
+
       <b-form-group id="input-group-2" label="Vietnamese:" label-for="input-2">
         <b-form-input
           id="input-2"
@@ -42,6 +51,7 @@ export default {
     return {
       form: {
         japanese: "",
+        spell: "",
         vietnamese: "",
         example: "",
       },
