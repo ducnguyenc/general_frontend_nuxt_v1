@@ -640,7 +640,7 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "http://localhost:8000/api/english/vocabulary",
+        "/english/vocabulary",
         {
           params: {
             status_shuffle: this.statusShuffle,
@@ -661,7 +661,7 @@ export default {
 
     async deleteVocabulary(id) {
       const response = await this.$axios.$delete(
-        "http://localhost:8000/api/english/vocabulary/" + id
+        "/english/vocabulary/" + id
       );
       if (response) {
         this.fetchVocabulary();
@@ -670,7 +670,7 @@ export default {
 
     async deleteAllVocabulary() {
       const response = await this.$axios.$post(
-        "http://localhost:8000/api/english/vocabulary/delete",
+        "/english/vocabulary/delete",
         this.selected
       );
       if (response) {
@@ -680,7 +680,7 @@ export default {
 
     async next() {
       const response = await this.$axios.$post(
-        "http://localhost:8000/api/english/vocabulary/forward",
+        "/english/vocabulary/forward",
         this.selected
       );
       if (response) {

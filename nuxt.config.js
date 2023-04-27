@@ -43,6 +43,10 @@ export default {
     '@nuxtjs/axios'
   ],
 
+  axios: {
+    baseURL: process.env.BASE_URL
+  },
+
   // Bootstrap https://go.nuxtjs.dev/bootstrap
   bootstrapVue: {
     // Install the `IconsPlugin` plugin (in addition to `BootstrapVue` plugin)

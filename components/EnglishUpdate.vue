@@ -53,14 +53,14 @@ export default {
   methods: {
     async fetchSomething() {
       const response = await this.$axios.$get(
-        "http://localhost:8000/api/english/vocabulary/" + this.$route.params.id
+        "/english/vocabulary/" + this.$route.params.id
       );
       this.form = response;
     },
     async onSubmit(event) {
       event.preventDefault();
       const response = await this.$axios.$put(
-        "http://localhost:8000/api/english/vocabulary/" + this.$route.params.id,
+        "/english/vocabulary/" + this.$route.params.id,
         this.form
       );
       if (response) {

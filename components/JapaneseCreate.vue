@@ -61,7 +61,7 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const response = await this.$axios.$post(
-        "http://localhost:8000/api/japanese/vocabulary",
+        "/japanese/vocabulary",
         this.form
       );
       if (response) {

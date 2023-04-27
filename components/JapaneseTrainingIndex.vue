@@ -317,7 +317,7 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "http://localhost:8000/api/japanese/vocabulary",
+        "/japanese/vocabulary",
         {
           params: {
             status_shuffle: this.statusShuffle,

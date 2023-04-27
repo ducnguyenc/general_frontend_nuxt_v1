@@ -51,7 +51,7 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const response = await this.$axios.$post(
-        "http://localhost:8000/api/english/vocabulary",
+        "/english/vocabulary",
         this.form
       );
       if (response) {
