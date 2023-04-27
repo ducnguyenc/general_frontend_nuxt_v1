@@ -61,7 +61,7 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const response = await this.$axios.$post(
-        "/japanese/vocabulary",
+        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary",
         this.form
       );
       if (response) {

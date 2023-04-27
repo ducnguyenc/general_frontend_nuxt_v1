@@ -51,7 +51,7 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const response = await this.$axios.$post(
-        "/english/vocabulary",
+        "https://laravel-general.000webhostapp.com/api/english/vocabulary",
         this.form
       );
       if (response) {

@@ -640,7 +640,7 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "/english/vocabulary",
+        "https://laravel-general.000webhostapp.com/api/english/vocabulary",
         {
           params: {
             status_shuffle: this.statusShuffle,
@@ -661,7 +661,7 @@ export default {
 
     async deleteVocabulary(id) {
       const response = await this.$axios.$delete(
-        "/english/vocabulary/" + id
+        "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + id
       );
       if (response) {
         this.fetchVocabulary();
@@ -670,7 +670,7 @@ export default {
 
     async deleteAllVocabulary() {
       const response = await this.$axios.$post(
-        "/english/vocabulary/delete",
+        "https://laravel-general.000webhostapp.com/api/english/vocabulary/delete",
         this.selected
       );
       if (response) {
@@ -680,7 +680,7 @@ export default {
 
     async next() {
       const response = await this.$axios.$post(
-        "/english/vocabulary/forward",
+        "https://laravel-general.000webhostapp.com/api/english/vocabulary/forward",
         this.selected
       );
       if (response) {

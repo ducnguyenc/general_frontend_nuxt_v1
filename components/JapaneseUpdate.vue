@@ -63,14 +63,14 @@ export default {
   methods: {
     async fetchSomething() {
       const response = await this.$axios.$get(
-        "/japanese/vocabulary/" + this.$route.params.id
+        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + this.$route.params.id
       );
       this.form = response;
     },
     async onSubmit(event) {
       event.preventDefault();
       const response = await this.$axios.$put(
-        "/japanese/vocabulary/" + this.$route.params.id,
+        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + this.$route.params.id,
         this.form
       );
       if (response) {

@@ -640,7 +640,7 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "/japanese/vocabulary",
+        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary",
         {
           params: {
             status_shuffle: this.statusShuffle,
@@ -661,7 +661,7 @@ export default {
 
     async deleteVocabulary(id) {
       const response = await this.$axios.$delete(
-        "/japanese/vocabulary/" + id
+        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + id
       );
       if (response) {
         this.fetchVocabulary();
@@ -670,7 +670,7 @@ export default {
 
     async deleteAllVocabulary() {
       const response = await this.$axios.$post(
-        "/japanese/vocabulary/delete",
+        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/delete",
         this.selected
       );
       if (response) {
@@ -680,7 +680,7 @@ export default {
 
     async next() {
       const response = await this.$axios.$post(
-        "/japanese/vocabulary/forward",
+        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/forward",
         this.selected
       );
       if (response) {

@@ -317,7 +317,7 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "/japanese/vocabulary",
+        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary",
         {
           params: {
             status_shuffle: this.statusShuffle,
