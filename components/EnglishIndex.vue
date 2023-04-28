@@ -664,7 +664,7 @@ export default {
       //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + id
       // );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/" + id, {
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/destroy/" + id, {
         method: "GET",
       })
 

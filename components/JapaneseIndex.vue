@@ -504,7 +504,7 @@ export default {
       //   "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + id
       // );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + id, {
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/japanese/vocabulary/destroy/" + id, {
         method: "GET",
       })
 
