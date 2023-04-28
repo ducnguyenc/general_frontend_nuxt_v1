@@ -514,10 +514,16 @@ export default {
     },
 
     async deleteAllVocabulary() {
-      const response = await this.$axios.$post(
-        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/delete",
-        this.selected
-      );
+      // const response = await this.$axios.$post(
+      //   "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/delete",
+      //   this.selected
+      // );
+
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/japanese/vocabulary/delete", {
+        method: "POST",
+        body: JSON.stringify(this.selected),
+      })
+
       if (response) {
         this.fetchVocabulary();
       }

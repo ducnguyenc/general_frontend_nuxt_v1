@@ -17,37 +17,21 @@
               Shuffle
             </div>
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
-            ><b-icon icon="trash"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"><b-icon icon="trash"></b-icon>
             Delete
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="showFull()"
-            ><b-icon icon="eye"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="showFull()"><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4" to="/english/create"
-            ><b-icon icon="plus-circle"></b-icon>
+          <b-button class="float-right mr-4 mb-4" to="/english/create"><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
 
           <b-card-text>
-            <b-table
-              :fields="fields"
-              :items="dayFirst"
-              :select-mode="selectMode"
-              selectable
-              @row-selected="onRowSelected"
-              bordered
-              striped
-              hover
-            >
+            <b-table :fields="fields" :items="dayFirst" :select-mode="selectMode" selectable @row-selected="onRowSelected"
+              bordered striped hover>
               <template #head(action)="data">
-                <b-form-checkbox
-                  v-model="isShowAction"
-                  name="check-button"
-                  switch
-                  @click="showAction()"
-                >
+                <b-form-checkbox v-model="isShowAction" name="check-button" switch @click="showAction()">
                   <b>{{ data.label }}</b>
                 </b-form-checkbox>
               </template>
@@ -68,15 +52,10 @@
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[1].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(spell)="data">
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
@@ -87,27 +66,16 @@
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[0].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(action)="data">
-                <b-button
-                  v-if="!isShowAction"
-                  :to="`/english/` + data.item.id + `/update`"
-                >
+                <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button
-                  v-if="!isShowAction"
-                  @click="deleteVocabulary(data.item.id)"
-                >
+                <b-button v-if="!isShowAction" @click="deleteVocabulary(data.item.id)">
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -138,37 +106,21 @@
               Shuffle
             </div>
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
-            ><b-icon icon="trash"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"><b-icon icon="trash"></b-icon>
             Delete
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="showFull()"
-            ><b-icon icon="eye"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="showFull()"><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4" to="/english/create"
-            ><b-icon icon="plus-circle"></b-icon>
+          <b-button class="float-right mr-4 mb-4" to="/english/create"><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
 
           <b-card-text>
-            <b-table
-              :fields="fields"
-              :items="daySecond"
-              :select-mode="selectMode"
-              selectable
-              @row-selected="onRowSelected"
-              bordered
-              striped
-              hover
-            >
+            <b-table :fields="fields" :items="daySecond" :select-mode="selectMode" selectable
+              @row-selected="onRowSelected" bordered striped hover>
               <template #head(action)="data">
-                <b-form-checkbox
-                  v-model="isShowAction"
-                  name="check-button"
-                  switch
-                  @click="showAction()"
-                >
+                <b-form-checkbox v-model="isShowAction" name="check-button" switch @click="showAction()">
                   <b>{{ data.label }}</b>
                 </b-form-checkbox>
               </template>
@@ -189,15 +141,10 @@
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[1].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(spell)="data">
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
@@ -208,27 +155,16 @@
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[0].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(action)="data">
-                <b-button
-                  v-if="!isShowAction"
-                  :to="`/english/` + data.item.id + `/update`"
-                >
+                <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button
-                  v-if="!isShowAction"
-                  @click="deleteVocabulary(data.item.id)"
-                >
+                <b-button v-if="!isShowAction" @click="deleteVocabulary(data.item.id)">
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -259,37 +195,21 @@
               Shuffle
             </div>
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
-            ><b-icon icon="trash"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"><b-icon icon="trash"></b-icon>
             Delete
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="showFull()"
-            ><b-icon icon="eye"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="showFull()"><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4" to="/english/create"
-            ><b-icon icon="plus-circle"></b-icon>
+          <b-button class="float-right mr-4 mb-4" to="/english/create"><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
 
           <b-card-text>
-            <b-table
-              :fields="fields"
-              :items="dayThird"
-              :select-mode="selectMode"
-              selectable
-              @row-selected="onRowSelected"
-              bordered
-              striped
-              hover
-            >
+            <b-table :fields="fields" :items="dayThird" :select-mode="selectMode" selectable @row-selected="onRowSelected"
+              bordered striped hover>
               <template #head(action)="data">
-                <b-form-checkbox
-                  v-model="isShowAction"
-                  name="check-button"
-                  switch
-                  @click="showAction()"
-                >
+                <b-form-checkbox v-model="isShowAction" name="check-button" switch @click="showAction()">
                   <b>{{ data.label }}</b>
                 </b-form-checkbox>
               </template>
@@ -310,15 +230,10 @@
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[1].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(spell)="data">
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
@@ -329,27 +244,16 @@
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[0].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(action)="data">
-                <b-button
-                  v-if="!isShowAction"
-                  :to="`/english/` + data.item.id + `/update`"
-                >
+                <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button
-                  v-if="!isShowAction"
-                  @click="deleteVocabulary(data.item.id)"
-                >
+                <b-button v-if="!isShowAction" @click="deleteVocabulary(data.item.id)">
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -380,37 +284,21 @@
               Shuffle
             </div>
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
-            ><b-icon icon="trash"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"><b-icon icon="trash"></b-icon>
             Delete
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="showFull()"
-            ><b-icon icon="eye"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="showFull()"><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4" to="/english/create"
-            ><b-icon icon="plus-circle"></b-icon>
+          <b-button class="float-right mr-4 mb-4" to="/english/create"><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
 
           <b-card-text>
-            <b-table
-              :fields="fields"
-              :items="dayFourth"
-              :select-mode="selectMode"
-              selectable
-              @row-selected="onRowSelected"
-              bordered
-              striped
-              hover
-            >
+            <b-table :fields="fields" :items="dayFourth" :select-mode="selectMode" selectable
+              @row-selected="onRowSelected" bordered striped hover>
               <template #head(action)="data">
-                <b-form-checkbox
-                  v-model="isShowAction"
-                  name="check-button"
-                  switch
-                  @click="showAction()"
-                >
+                <b-form-checkbox v-model="isShowAction" name="check-button" switch @click="showAction()">
                   <b>{{ data.label }}</b>
                 </b-form-checkbox>
               </template>
@@ -431,15 +319,10 @@
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[1].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(spell)="data">
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
@@ -450,27 +333,16 @@
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[0].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(action)="data">
-                <b-button
-                  v-if="!isShowAction"
-                  :to="`/english/` + data.item.id + `/update`"
-                >
+                <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button
-                  v-if="!isShowAction"
-                  @click="deleteVocabulary(data.item.id)"
-                >
+                <b-button v-if="!isShowAction" @click="deleteVocabulary(data.item.id)">
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -497,37 +369,21 @@
               Shuffle
             </div>
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"
-            ><b-icon icon="trash"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="deleteAllVocabulary()"><b-icon icon="trash"></b-icon>
             Delete
           </b-button>
-          <b-button class="float-right mr-4 mb-4" @click="showFull()"
-            ><b-icon icon="eye"></b-icon>
+          <b-button class="float-right mr-4 mb-4" @click="showFull()"><b-icon icon="eye"></b-icon>
             Show
           </b-button>
-          <b-button class="float-right mr-4 mb-4" to="/english/create"
-            ><b-icon icon="plus-circle"></b-icon>
+          <b-button class="float-right mr-4 mb-4" to="/english/create"><b-icon icon="plus-circle"></b-icon>
             Create
           </b-button>
 
           <b-card-text>
-            <b-table
-              :fields="fields"
-              :items="dayFiveth"
-              :select-mode="selectMode"
-              selectable
-              @row-selected="onRowSelected"
-              bordered
-              striped
-              hover
-            >
+            <b-table :fields="fields" :items="dayFiveth" :select-mode="selectMode" selectable
+              @row-selected="onRowSelected" bordered striped hover>
               <template #head(action)="data">
-                <b-form-checkbox
-                  v-model="isShowAction"
-                  name="check-button"
-                  switch
-                  @click="showAction()"
-                >
+                <b-form-checkbox v-model="isShowAction" name="check-button" switch @click="showAction()">
                   <b>{{ data.label }}</b>
                 </b-form-checkbox>
               </template>
@@ -548,15 +404,10 @@
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[1].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(spell)="data">
                 <p v-if="[0, 2].includes(data.item.status) || isShowTable">
@@ -567,27 +418,16 @@
                 <p v-if="[1, 2].includes(data.item.status) || isShowTable">
                   {{ data.value }}
                 </p>
-                <input
-                  v-if="[0].includes(data.item.status) && !isShowTable"
-                  type="text"
-                  @input="
-                    (event) =>
-                      (data.item.status =
-                        event.target.value == data.value ? 2 : data.item.status)
-                  "
-                />
+                <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
+                  (data.item.status =
+                    event.target.value == data.value ? 2 : data.item.status)
+                  " />
               </template>
               <template #cell(action)="data">
-                <b-button
-                  v-if="!isShowAction"
-                  :to="`/english/` + data.item.id + `/update`"
-                >
+                <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
                   <b-icon icon="pencil"></b-icon>
                 </b-button>
-                <b-button
-                  v-if="!isShowAction"
-                  @click="deleteVocabulary(data.item.id)"
-                >
+                <b-button v-if="!isShowAction" @click="deleteVocabulary(data.item.id)">
                   <b-icon icon="trash"></b-icon>
                 </b-button>
                 <b-button v-if="isShowAction" @click="changeStatus(data)">
@@ -629,7 +469,7 @@ export default {
       dayThird: [],
       dayFourth: [],
       dayFiveth: [],
-      
+
     };
   },
 
@@ -674,10 +514,16 @@ export default {
     },
 
     async deleteAllVocabulary() {
-      const response = await this.$axios.$post(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary/delete",
-        this.selected
-      );
+      // const response = await this.$axios.$post(
+      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/delete",
+      //   this.selected
+      // );
+
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/delete", {
+        method: "POST",
+        body: JSON.stringify(this.selected),
+      })
+
       if (response) {
         this.fetchVocabulary();
       }
