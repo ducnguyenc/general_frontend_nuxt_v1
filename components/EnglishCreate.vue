@@ -2,29 +2,15 @@
   <b-container>
     <b-form @submit="onSubmit" @reset="onReset">
       <b-form-group id="input-group-1" label="English:" label-for="input-1">
-        <b-form-input
-          id="input-1"
-          v-model="form.english"
-          placeholder="Enter english"
-          required
-        ></b-form-input>
+        <b-form-input id="input-1" v-model="form.english" placeholder="Enter english" required></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-2" label="Vietnamese:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.vietnamese"
-          placeholder="Enter vietnamese"
-          required
-        ></b-form-input>
+        <b-form-input id="input-2" v-model="form.vietnamese" placeholder="Enter vietnamese" required></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-3" label="Example:" label-for="input-3">
-        <b-form-input
-          id="input-2"
-          v-model="form.example"
-          placeholder="Enter example"
-        ></b-form-input>
+        <b-form-input id="input-2" v-model="form.example" placeholder="Enter example"></b-form-input>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -50,10 +36,16 @@ export default {
   methods: {
     async onSubmit(event) {
       event.preventDefault();
-      const response = await this.$axios.$post(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary",
-        this.form
-      );
+      // const response = await this.$axios.$post(
+      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary",
+      //   this.form
+      // );
+
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary", {
+        method: "POST",
+        body: JSON.stringify(this.form),
+      })
+
       if (response) {
         this.$router.push({ path: "/english" });
       }
