@@ -660,9 +660,14 @@ export default {
     },
 
     async deleteVocabulary(id) {
-      const response = await this.$axios.$delete(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + id
-      );
+      // const response = await this.$axios.$delete(
+      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + id
+      // );
+
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/" + id, {
+        method: "DELETE",
+      })
+
       if (response) {
         this.fetchVocabulary();
       }
