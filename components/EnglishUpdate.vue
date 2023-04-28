@@ -59,10 +59,16 @@ export default {
     },
     async onSubmit(event) {
       event.preventDefault();
-      const response = await this.$axios.$put(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + this.$route.params.id,
-        this.form
-      );
+      // const response = await this.$axios.$put(
+      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + this.$route.params.id,
+      //   this.form
+      // );
+
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/update/" + this.$route.params.id, {
+        method: "POST",
+        body: JSON.stringify(this.form),
+      })
+
       if (response) {
         this.$router.push({ path: "/english" });
       }

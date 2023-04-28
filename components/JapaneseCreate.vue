@@ -60,10 +60,16 @@ export default {
   methods: {
     async onSubmit(event) {
       event.preventDefault();
-      const response = await this.$axios.$post(
-        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary",
-        this.form
-      );
+      // const response = await this.$axios.$post(
+      //   "https://laravel-general.000webhostapp.com/api/japanese/vocabulary",
+      //   this.form
+      // );
+
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/japanese/vocabulary", {
+        method: "POST",
+        body: JSON.stringify(this.form),
+      })
+
       if (response) {
         this.$router.push({ path: "/japanese" });
       }

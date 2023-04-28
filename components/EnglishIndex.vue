@@ -684,10 +684,16 @@ export default {
     },
 
     async next() {
-      const response = await this.$axios.$post(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary/forward",
-        this.selected
-      );
+      // const response = await this.$axios.$post(
+      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/forward",
+      //   this.selected
+      // );
+
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/forward", {
+        method: "POST",
+        body: JSON.stringify(this.selected),
+      })
+
       if (response) {
         this.fetchVocabulary();
       }

@@ -2,38 +2,19 @@
   <b-container>
     <b-form @submit="onSubmit" @reset="onReset">
       <b-form-group id="input-group-1" label="Japanese:" label-for="input-1">
-        <b-form-input
-          id="input-1"
-          v-model="form.japanese"
-          placeholder="Enter japanese"
-          required
-        ></b-form-input>
+        <b-form-input id="input-1" v-model="form.japanese" placeholder="Enter japanese" required></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-2" label="Spell:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.spell"
-          placeholder="Enter spell"
-          required
-        ></b-form-input>
+        <b-form-input id="input-2" v-model="form.spell" placeholder="Enter spell" required></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-2" label="Vietnamese:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.vietnamese"
-          placeholder="Enter vietnamese"
-          required
-        ></b-form-input>
+        <b-form-input id="input-2" v-model="form.vietnamese" placeholder="Enter vietnamese" required></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-3" label="Example:" label-for="input-3">
-        <b-form-input
-          id="input-2"
-          v-model="form.example"
-          placeholder="Enter example"
-        ></b-form-input>
+        <b-form-input id="input-2" v-model="form.example" placeholder="Enter example"></b-form-input>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -69,10 +50,16 @@ export default {
     },
     async onSubmit(event) {
       event.preventDefault();
-      const response = await this.$axios.$put(
-        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + this.$route.params.id,
-        this.form
-      );
+      // const response = await this.$axios.$put(
+      //   "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + this.$route.params.id,
+      //   this.form
+      // );
+
+      const response = await fetch("https://laravel-general.000webhostapp.com/api/japanese/vocabulary/update/" + this.$route.params.id, {
+        method: "POST",
+        body: JSON.stringify(this.form),
+      })
+
       if (response) {
         this.$router.push({ path: "/japanese" });
       }
