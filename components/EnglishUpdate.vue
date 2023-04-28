@@ -52,14 +52,10 @@ export default {
   },
   methods: {
     async fetchSomething() {
-      // const response = await this.$axios.$get(
-      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + this.$route.params.id
-      // );
+      const response = await this.$axios.$get(
+        "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + this.$route.params.id
+      );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/update/" + this.$route.params.id, {
-        method: "POST",
-        body: JSON.stringify(this.form),
-      })
       this.form = response;
     },
     async onSubmit(event) {
