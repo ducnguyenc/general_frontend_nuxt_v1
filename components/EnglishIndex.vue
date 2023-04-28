@@ -665,7 +665,7 @@ export default {
       // );
 
       const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/" + id, {
-        method: "POST",
+        method: "GET",
       })
 
       if (response) {
