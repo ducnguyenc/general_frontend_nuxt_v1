@@ -375,6 +375,8 @@ export default {
         this.text[day] = null;
         this.genVocabulary(vocabularyDay, day);
       } else {
+        let wordAudio = this.statusWord[day] ? this.wordHide[day] : this.wordShow[day]
+        new Audio('https://translate.google.com.vn/translate_tts?ie=UTF-8&q=' + wordAudio + '&tl=en&client=tw-ob').play();
         if (this.wordHide[day].includes(this.text[day])) {
           this.color = "text-success";
         } else {
