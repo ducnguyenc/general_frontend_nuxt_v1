@@ -1056,3 +1056,36 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.b-tab-mobile .nav-link {
+  padding: 4px 12px;
+}
+
+.b-tab-mobile .button-mobile {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.b-tab-mobile .button-mobile .btn {
+  width: 88px;
+  padding: 0.25rem 0rem
+}
+
+.b-tab-mobile .b-table {
+  font-size: 12px
+}
+
+.b-tab-mobile .table.b-table.b-table-stacked>tbody>tr>[data-label]::before {
+  width: 30%;
+  text-align: left
+}
+
+#myBtn {
+  position: fixed;
+  z-index: 99;
+  right: 10px;
+  bottom: 80px;
+}
+</style>

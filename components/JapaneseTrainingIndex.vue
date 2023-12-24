@@ -529,3 +529,25 @@ export default {
   },
 };
 </script>
+
+<style>
+.b-tab-training-mobile .nav-link {
+  padding: 4px 12px;
+}
+
+.b-tab-training-mobile {
+  font-size: 12px;
+}
+
+.b-tab-training-mobile .btn {
+  font-size: 12px;
+}
+
+.b-tab-training-mobile .d-flex {
+  flex-wrap: wrap;
+}
+
+.b-tab-training-mobile .table.b-table.b-table-stacked>tbody>tr>[data-label]::before {
+  width: 30%;
+}
+</style>
