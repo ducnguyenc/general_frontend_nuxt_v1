@@ -14,7 +14,7 @@
                   wordShow[1]
                 }}</label>
                 <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[1]"></b-form-input>
-                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+                <b-button size="xs" type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
                 <b-form-select v-model="selected[1]" :options="selects" value="null"
@@ -209,11 +209,11 @@
                 <label :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[1]
                 }}</label>
-                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[1]"></b-form-input>
-                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+                <b-form-input size="xs" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[1]"></b-form-input>
+                <b-button size="xs" type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
-                <b-form-select size="sm" v-model="selected[1]" :options="selects" value="null"
+                <b-form-select size="xs" v-model="selected[1]" :options="selects" value="null"
                   @change="genVocabulary(dayFirst, 1)"></b-form-select>
               </div>
             </b-form>
@@ -249,11 +249,11 @@
                 <label :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[2]
                 }}</label>
-                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[2]"></b-form-input>
-                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+                <b-form-input size="xs" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[2]"></b-form-input>
+                <b-button size="xs" type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
-                <b-form-select size="sm" v-model="selected[2]" :options="selects" value="null"
+                <b-form-select size="xs" v-model="selected[2]" :options="selects" value="null"
                   @change="genVocabulary(daySecond, 2)"></b-form-select>
               </div>
             </b-form>
@@ -291,11 +291,11 @@
                 <label :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[3]
                 }}</label>
-                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[3]"></b-form-input>
-                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+                <b-form-input size="xs" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[3]"></b-form-input>
+                <b-button size="xs" type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
-                <b-form-select size="sm" v-model="selected[3]" :options="selects" value="null"
+                <b-form-select size="xs" v-model="selected[3]" :options="selects" value="null"
                   @change="genVocabulary(dayThird, 3)"></b-form-select>
               </div>
             </b-form>
@@ -331,11 +331,11 @@
                 <label :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[4]
                 }}</label>
-                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[4]"></b-form-input>
-                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+                <b-form-input size="xs" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[4]"></b-form-input>
+                <b-button size="xs" type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
-                <b-form-select size="sm" v-model="selected[4]" :options="selects" value="null"
+                <b-form-select size="xs" v-model="selected[4]" :options="selects" value="null"
                   @change="genVocabulary(dayFourth, 4)"></b-form-select>
               </div>
             </b-form>
@@ -371,11 +371,11 @@
                 <label :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[5]
                 }}</label>
-                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[5]"></b-form-input>
-                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+                <b-form-input size="xs" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[5]"></b-form-input>
+                <b-button size="xs" type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
-                <b-form-select size="sm" v-model="selected[5]" :options="selects" value="null"
+                <b-form-select size="xs" v-model="selected[5]" :options="selects" value="null"
                   @change="genVocabulary(dayFiveth, 5)"></b-form-select>
               </div>
             </b-form>
