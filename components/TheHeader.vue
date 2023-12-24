@@ -1,8 +1,7 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar toggleable="lg" type="dark">
       <b-navbar-brand href="/">General</b-navbar-brand>
-
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <!-- Left aligned nav items -->
@@ -56,3 +55,12 @@
     </b-navbar>
   </div>
 </template>
+<style>
+.navbar {
+  background-color: red;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+}
+</style>

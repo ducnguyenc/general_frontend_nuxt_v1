@@ -44,8 +44,8 @@ export default {
   bottom: 24px;
   width: 100%;
   color: white;
-  background-color: #17a2b8;
-  border-top: 1px solid #17a2b8;
+  background-color: red;
+  border-top: 1px solid red;
   text-align: center;
 }
 .footer {

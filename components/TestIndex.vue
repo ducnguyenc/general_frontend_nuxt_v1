@@ -1,5 +1,6 @@
 <template>
-  <b-container fluid>
+  <div class="aaa"></div>
+  <!-- <b-container fluid>
     <b-row align-h="between" class="m-2">
       <b-col cols="3">
         <b-form-group
@@ -100,73 +101,94 @@
         <b-img :src="imageSrc" fluid alt="Fluid image"></b-img>
       </b-link>
     </b-modal>
-  </b-container>
+  </b-container> -->
 </template>
   
 <script>
 export default {
-  data() {
-    return {
-      transProps: {
-        name: "flip-list",
-      },
-      sortBy: "age",
-      fields: [
-        { key: "index", sortable: true },
-        { key: "name", sortable: true },
-        { key: "address", sortable: true },
-        { key: "price", sortable: true },
-        { key: "note", sortable: true },
-        {
-          key: "image",
-          sortable: true,
-          thStyle: {
-            width: "20%",
-          },
-        },
-        { key: "action" },
-      ],
-      items: [
-        {
-          name: 40,
-          address: "Dickerson",
-          image:
-            "https://drive.google.com/uc?export=view&id=10VIpnizNCn8aD8YbJ1cc3-w6GgOWI0vq",
-          price: "Macdonald",
-          note: "Macdonald",
-        },
-        {
-          name: 1,
-          address: "a",
-          image:
-            "https://drive.google.com/uc?export=view&id=10VIpnizNCn8aD8YbJ1cc3-w6GgOWI0vq",
-          price: "v",
-          note: "c",
-        },
-      ],
-      selectMode: "multi",
-      selected: [],
-      rows: 100,
-      perPage: 1,
-      currentPage: 5,
-      filter: null,
-      filterOn: [],
-      imageSrc: null,
-    };
-  },
-  methods: {
-    onRowSelected(items) {
-      this.selected = items;
-    },
-    selectAllRows() {
-      this.$refs.selectableTable.selectAllRows();
-    },
-    clearSelected() {
-      this.$refs.selectableTable.clearSelected();
-    },
-    modal(data) {
-      this.imageSrc = data;
-    },
-  },
+  // data() {
+  //   return {
+  //     transProps: {
+  //       name: "flip-list",
+  //     },
+  //     sortBy: "age",
+  //     fields: [
+  //       { key: "index", sortable: true },
+  //       { key: "name", sortable: true },
+  //       { key: "address", sortable: true },
+  //       { key: "price", sortable: true },
+  //       { key: "note", sortable: true },
+  //       {
+  //         key: "image",
+  //         sortable: true,
+  //         thStyle: {
+  //           width: "20%",
+  //         },
+  //       },
+  //       { key: "action" },
+  //     ],
+  //     items: [
+  //       {
+  //         name: 40,
+  //         address: "Dickerson",
+  //         image:
+  //           "https://drive.google.com/uc?export=view&id=10VIpnizNCn8aD8YbJ1cc3-w6GgOWI0vq",
+  //         price: "Macdonald",
+  //         note: "Macdonald",
+  //       },
+  //       {
+  //         name: 1,
+  //         address: "a",
+  //         image:
+  //           "https://drive.google.com/uc?export=view&id=10VIpnizNCn8aD8YbJ1cc3-w6GgOWI0vq",
+  //         price: "v",
+  //         note: "c",
+  //       },
+  //     ],
+  //     selectMode: "multi",
+  //     selected: [],
+  //     rows: 100,
+  //     perPage: 1,
+  //     currentPage: 5,
+  //     filter: null,
+  //     filterOn: [],
+  //     imageSrc: null,
+  //   };
+  // },
+  // methods: {
+  //   onRowSelected(items) {
+  //     this.selected = items;
+  //   },
+  //   selectAllRows() {
+  //     this.$refs.selectableTable.selectAllRows();
+  //   },
+  //   clearSelected() {
+  //     this.$refs.selectableTable.clearSelected();
+  //   },
+  //   modal(data) {
+  //     this.imageSrc = data;
+  //   },
+  // },
 };
 </script>
+
+
+<style>
+@media screen and (min-width: 600px) {
+  .aaa {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../static/dthy.jpg");
+    background-size: contain;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .aaa {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../static/dthy.jpg");
+    background-size: contain;
+  }
+}
+</style>
