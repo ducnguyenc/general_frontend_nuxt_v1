@@ -1,10 +1,12 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand href="#">General</b-navbar-brand>
+      <b-navbar-brand href="/">General</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <!-- Left aligned nav items -->
-      <b-collapse is-nav>
+      <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item to="/english">English</b-nav-item>
         </b-navbar-nav>

@@ -1,270 +1,398 @@
 <template>
-  <b-container fluid>
-    <b-card no-body>
-      <b-tabs card>
-        <b-tab title="Day 1">
-          <b-form
-            @submit="onsubmit($event, dayFirst, 1)"
-            inline
-            class="mb-2 justify-content-around"
-          >
-            <div>
-              <span class="font-weight-bold"
-                >remaining words {{ vocabularyLength[1] }}</span
-              >
-            </div>
-            <div class="d-flex">
-              <span hidden>{{ test }}</span>
-              <label :class="`mr-sm-2 font-weight-bold ` + color">{{
-                wordShow[1]
-              }}</label>
-              <b-form-input
-                class="mb-2 mr-sm-2 mb-sm-0"
-                autofocus
-                v-model="text[1]"
-              ></b-form-input>
-              <b-button type="submit" variant="primary">Submit</b-button>
-            </div>
-            <div>
-              <b-form-select
-                v-model="selected[1]"
-                :options="selects"
-                value="null"
-                @change="genVocabulary(dayFirst, 1)"
-              ></b-form-select>
-            </div>
-          </b-form>
+  <div>
+    <b-container v-if="deviceType == 1" fluid>
+      <b-card no-body>
+        <b-tabs card>
+          <b-tab title="Day 1">
+            <b-form @submit="onsubmit($event, dayFirst, 1)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[1] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[1]
+                }}</label>
+                <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[1]"></b-form-input>
+                <b-button type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select v-model="selected[1]" :options="selects" value="null"
+                  @change="genVocabulary(dayFirst, 1)"></b-form-select>
+              </div>
+            </b-form>
 
-          <b-table-simple hover responsive>
-            <b-thead head-variant="light">
-              <b-tr>
-                <b-th>Japanese</b-th>
-                <b-th>Spell</b-th>
-                <b-th>Vietnamese</b-th>
-                <b-th>Example</b-th>
-              </b-tr>
-            </b-thead>
-            <b-tbody>
-              <b-tr v-if="status[1] == true">
-                <b-td>{{ vocabulary[1].japanese }}</b-td>
-                <b-td> {{ vocabulary[1].spell }} </b-td>
-                <b-td> {{ vocabulary[1].vietnamese }} </b-td>
-                <b-td> {{ vocabulary[1].example }} </b-td>
-              </b-tr>
-            </b-tbody>
-          </b-table-simple>
-        </b-tab>
-        <b-tab title="Day 2">
-          <b-form
-            @submit="onsubmit($event, daySecond, 2)"
-            inline
-            class="mb-2 justify-content-around"
-          >
-            <div>
-              <span class="font-weight-bold"
-                >remaining words {{ vocabularyLength[2] }}</span
-              >
-            </div>
-            <div class="d-flex">
-              <span hidden>{{ test }}</span>
-              <label :class="`mr-sm-2 font-weight-bold ` + color">{{
-                wordShow[2]
-              }}</label>
-              <b-form-input
-                class="mb-2 mr-sm-2 mb-sm-0"
-                autofocus
-                v-model="text[2]"
-              ></b-form-input>
-              <b-button type="submit" variant="primary">Submit</b-button>
-            </div>
-            <div>
-              <b-form-select
-                v-model="selected[2]"
-                :options="selects"
-                value="null"
-                @change="genVocabulary(daySecond, 2)"
-              ></b-form-select>
-            </div>
-          </b-form>
+            <b-table-simple hover responsive>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[1] == true">
+                  <b-td>{{ vocabulary[1].japanese }}</b-td>
+                  <b-td> {{ vocabulary[1].spell }} </b-td>
+                  <b-td> {{ vocabulary[1].vietnamese }} </b-td>
+                  <b-td> {{ vocabulary[1].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+          <b-tab title="Day 2">
+            <b-form @submit="onsubmit($event, daySecond, 2)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[2] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[2]
+                }}</label>
+                <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[2]"></b-form-input>
+                <b-button type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select v-model="selected[2]" :options="selects" value="null"
+                  @change="genVocabulary(daySecond, 2)"></b-form-select>
+              </div>
+            </b-form>
 
-          <b-table-simple hover responsive>
-            <b-thead head-variant="light">
-              <b-tr>
-                <b-th>Japanese</b-th>
-                <b-th>Spell</b-th>
-                <b-th>Vietnamese</b-th>
-                <b-th>Example</b-th>
-              </b-tr>
-            </b-thead>
-            <b-tbody>
-              <b-tr v-if="status[2] == true">
-                <b-td>{{ vocabulary[2].japanese }}</b-td>
-                <b-td> {{ vocabulary[2].spell }} </b-td>
-                <b-td> {{ vocabulary[2].vietnamese }} </b-td>
-                <b-td> {{ vocabulary[2].example }} </b-td>
-              </b-tr>
-            </b-tbody>
-          </b-table-simple>
-        </b-tab>
-        <b-tab title="Day 3">
-          <b-form
-            @submit="onsubmit($event, dayThird, 3)"
-            inline
-            class="mb-2 justify-content-around"
-          >
-            <div>
-              <span class="font-weight-bold"
-                >remaining words {{ vocabularyLength[3] }}</span
-              >
-            </div>
-            <div class="d-flex">
-              <span hidden>{{ test }}</span>
-              <label :class="`mr-sm-2 font-weight-bold ` + color">{{
-                wordShow[3]
-              }}</label>
-              <b-form-input
-                class="mb-2 mr-sm-2 mb-sm-0"
-                autofocus
-                v-model="text[3]"
-              ></b-form-input>
-              <b-button type="submit" variant="primary">Submit</b-button>
-            </div>
-            <div>
-              <b-form-select
-                v-model="selected[3]"
-                :options="selects"
-                value="null"
-                @change="genVocabulary(dayThird, 3)"
-              ></b-form-select>
-            </div>
-          </b-form>
+            <b-table-simple hover responsive>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[2] == true">
+                  <b-td>{{ vocabulary[2].japanese }}</b-td>
+                  <b-td> {{ vocabulary[2].spell }} </b-td>
+                  <b-td> {{ vocabulary[2].vietnamese }} </b-td>
+                  <b-td> {{ vocabulary[2].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+          <b-tab title="Day 3">
+            <b-form @submit="onsubmit($event, dayThird, 3)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[3] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[3]
+                }}</label>
+                <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[3]"></b-form-input>
+                <b-button type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select v-model="selected[3]" :options="selects" value="null"
+                  @change="genVocabulary(dayThird, 3)"></b-form-select>
+              </div>
+            </b-form>
 
-          <b-table-simple hover responsive>
-            <b-thead head-variant="light">
-              <b-tr>
-                <b-th>Japanese</b-th>
-                <b-th>Spell</b-th>
-                <b-th>Vietnamese</b-th>
-                <b-th>Example</b-th>
-              </b-tr>
-            </b-thead>
-            <b-tbody>
-              <b-tr v-if="status[3] == true">
-                <b-td>{{ vocabulary[3].japanese }}</b-td>
-                <b-td> {{ vocabulary[3].spell }} </b-td>
-                <b-td> {{ vocabulary[3].vietnamese }} </b-td>
-                <b-td> {{ vocabulary[3].example }} </b-td>
-              </b-tr>
-            </b-tbody>
-          </b-table-simple>
-        </b-tab>
-        <b-tab title="Day 4">
-          <b-form
-            @submit="onsubmit($event, dayFourth, 4)"
-            inline
-            class="mb-2 justify-content-around"
-          >
-            <div>
-              <span class="font-weight-bold"
-                >remaining words {{ vocabularyLength[4] }}</span
-              >
-            </div>
-            <div class="d-flex">
-              <span hidden>{{ test }}</span>
-              <label :class="`mr-sm-2 font-weight-bold ` + color">{{
-                wordShow[4]
-              }}</label>
-              <b-form-input
-                class="mb-2 mr-sm-2 mb-sm-0"
-                autofocus
-                v-model="text[4]"
-              ></b-form-input>
-              <b-button type="submit" variant="primary">Submit</b-button>
-            </div>
-            <div>
-              <b-form-select
-                v-model="selected[4]"
-                :options="selects"
-                value="null"
-                @change="genVocabulary(dayFourth, 4)"
-              ></b-form-select>
-            </div>
-          </b-form>
+            <b-table-simple hover responsive>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[3] == true">
+                  <b-td>{{ vocabulary[3].japanese }}</b-td>
+                  <b-td> {{ vocabulary[3].spell }} </b-td>
+                  <b-td> {{ vocabulary[3].vietnamese }} </b-td>
+                  <b-td> {{ vocabulary[3].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+          <b-tab title="Day 4">
+            <b-form @submit="onsubmit($event, dayFourth, 4)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[4] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[4]
+                }}</label>
+                <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[4]"></b-form-input>
+                <b-button type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select v-model="selected[4]" :options="selects" value="null"
+                  @change="genVocabulary(dayFourth, 4)"></b-form-select>
+              </div>
+            </b-form>
 
-          <b-table-simple hover responsive>
-            <b-thead head-variant="light">
-              <b-tr>
-                <b-th>Japanese</b-th>
-                <b-th>Spell</b-th>
-                <b-th>Vietnamese</b-th>
-                <b-th>Example</b-th>
-              </b-tr>
-            </b-thead>
-            <b-tbody>
-              <b-tr v-if="status[4] == true">
-                <b-td>{{ vocabulary[4].japanese }}</b-td>
-                <b-td> {{ vocabulary[4].spell }} </b-td>
-                <b-td> {{ vocabulary[4].vietnamese }} </b-td>
-                <b-td> {{ vocabulary[4].example }} </b-td>
-              </b-tr>
-            </b-tbody>
-          </b-table-simple>
-        </b-tab>
-        <b-tab title="Day 5">
-          <b-form
-            @submit="onsubmit($event, dayFiveth, 5)"
-            inline
-            class="mb-2 justify-content-around"
-          >
-            <div>
-              <span class="font-weight-bold"
-                >remaining words {{ vocabularyLength[5] }}</span
-              >
-            </div>
-            <div class="d-flex">
-              <span hidden>{{ test }}</span>
-              <label :class="`mr-sm-2 font-weight-bold ` + color">{{
-                wordShow[5]
-              }}</label>
-              <b-form-input
-                class="mb-2 mr-sm-2 mb-sm-0"
-                autofocus
-                v-model="text[5]"
-              ></b-form-input>
-              <b-button type="submit" variant="primary">Submit</b-button>
-            </div>
-            <div>
-              <b-form-select
-                v-model="selected[5]"
-                :options="selects"
-                value="null"
-                @change="genVocabulary(dayFiveth, 5)"
-              ></b-form-select>
-            </div>
-          </b-form>
+            <b-table-simple hover responsive>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[4] == true">
+                  <b-td>{{ vocabulary[4].japanese }}</b-td>
+                  <b-td> {{ vocabulary[4].spell }} </b-td>
+                  <b-td> {{ vocabulary[4].vietnamese }} </b-td>
+                  <b-td> {{ vocabulary[4].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+          <b-tab title="Day 5">
+            <b-form @submit="onsubmit($event, dayFiveth, 5)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[5] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[5]
+                }}</label>
+                <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[5]"></b-form-input>
+                <b-button type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select v-model="selected[5]" :options="selects" value="null"
+                  @change="genVocabulary(dayFiveth, 5)"></b-form-select>
+              </div>
+            </b-form>
 
-          <b-table-simple hover responsive>
-            <b-thead head-variant="light">
-              <b-tr>
-                <b-th>Japanese</b-th>
-                <b-th>Spell</b-th>
-                <b-th>Vietnamese</b-th>
-                <b-th>Example</b-th>
-              </b-tr>
-            </b-thead>
-            <b-tbody>
-              <b-tr v-if="status[5] == true">
-                <b-td>{{ vocabulary[5].japanese }}</b-td>
-                <b-td> {{ vocabulary[5].spell }} </b-td>
-                <b-td> {{ vocabulary[5].vietnamese }} </b-td>
-                <b-td> {{ vocabulary[5].example }} </b-td>
-              </b-tr>
-            </b-tbody>
-          </b-table-simple>
-        </b-tab>
-      </b-tabs>
-    </b-card>
-  </b-container>
+            <b-table-simple hover responsive>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[5] == true">
+                  <b-td>{{ vocabulary[5].japanese }}</b-td>
+                  <b-td> {{ vocabulary[5].spell }} </b-td>
+                  <b-td> {{ vocabulary[5].vietnamese }} </b-td>
+                  <b-td> {{ vocabulary[5].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+        </b-tabs>
+      </b-card>
+    </b-container>
+    <b-container v-if="deviceType == 2" fluid>
+      <b-card no-body>
+        <b-tabs small card class="b-tab-training-mobile">
+          <b-tab title="Day 1">
+            <b-form @submit="onsubmit($event, dayFirst, 1)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[1] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[1]
+                }}</label>
+                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[1]"></b-form-input>
+                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select size="sm" v-model="selected[1]" :options="selects" value="null"
+                  @change="genVocabulary(dayFirst, 1)"></b-form-select>
+              </div>
+            </b-form>
+
+            <b-table-simple hover responsive stacked>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[1] == true">
+                  <b-td stacked-heading="Japanese">{{ vocabulary[1].japanese }}</b-td>
+                  <b-td stacked-heading="Spell"> {{ vocabulary[1].spell }} </b-td>
+                  <b-td stacked-heading="Vietnamese"> {{ vocabulary[1].vietnamese }} </b-td>
+                  <b-td stacked-heading="Example"> {{ vocabulary[1].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+          <b-tab title="Day 2">
+            <b-form @submit="onsubmit($event, daySecond, 2)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[2] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[2]
+                }}</label>
+                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[2]"></b-form-input>
+                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select size="sm" v-model="selected[2]" :options="selects" value="null"
+                  @change="genVocabulary(daySecond, 2)"></b-form-select>
+              </div>
+            </b-form>
+
+            <b-table-simple hover responsive stacked>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[2] == true">
+                  <b-td stacked-heading="Japanese">{{ vocabulary[2].japanese }}</b-td>
+                  <b-td stacked-heading="Spell"> {{ vocabulary[2].spell }} </b-td>
+                  <b-td stacked-heading="Vietnamese"> {{ vocabulary[2].vietnamese }} </b-td>
+                  <b-td stacked-heading="Example"> {{ vocabulary[2].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+          <b-tab title="Day 3">
+            <b-form @submit="onsubmit($event, dayThird, 3)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[3] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[3]
+                }}</label>
+                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[3]"></b-form-input>
+                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select size="sm" v-model="selected[3]" :options="selects" value="null"
+                  @change="genVocabulary(dayThird, 3)"></b-form-select>
+              </div>
+            </b-form>
+
+            <b-table-simple hover responsive stacked>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[3] == true">
+                  <b-td stacked-heading="Japanese">{{ vocabulary[3].japanese }}</b-td>
+                  <b-td stacked-heading="Spell"> {{ vocabulary[3].spell }} </b-td>
+                  <b-td stacked-heading="Vietnamese"> {{ vocabulary[3].vietnamese }} </b-td>
+                  <b-td stacked-heading="Example"> {{ vocabulary[3].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+          <b-tab title="Day 4">
+            <b-form @submit="onsubmit($event, dayFourth, 4)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[4] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[4]
+                }}</label>
+                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[4]"></b-form-input>
+                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select size="sm" v-model="selected[4]" :options="selects" value="null"
+                  @change="genVocabulary(dayFourth, 4)"></b-form-select>
+              </div>
+            </b-form>
+
+            <b-table-simple hover responsive stacked>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[4] == true">
+                  <b-td stacked-heading="Japanese">{{ vocabulary[4].japanese }}</b-td>
+                  <b-td stacked-heading="Spell"> {{ vocabulary[4].spell }} </b-td>
+                  <b-td stacked-heading="Vietnamese"> {{ vocabulary[4].vietnamese }} </b-td>
+                  <b-td stacked-heading="Example"> {{ vocabulary[4].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+          <b-tab title="Day 5">
+            <b-form @submit="onsubmit($event, dayFiveth, 5)" inline class="mb-2 justify-content-around">
+              <div>
+                <span class="font-weight-bold">remaining words {{ vocabularyLength[5] }}</span>
+              </div>
+              <div class="d-flex">
+                <span hidden>{{ test }}</span>
+                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                  wordShow[5]
+                }}</label>
+                <b-form-input size="sm" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[5]"></b-form-input>
+                <b-button size="sm" type="submit" variant="primary">Submit</b-button>
+              </div>
+              <div>
+                <b-form-select size="sm" v-model="selected[5]" :options="selects" value="null"
+                  @change="genVocabulary(dayFiveth, 5)"></b-form-select>
+              </div>
+            </b-form>
+
+            <b-table-simple hover responsive stacked>
+              <b-thead head-variant="light">
+                <b-tr>
+                  <b-th>Japanese</b-th>
+                  <b-th>Spell</b-th>
+                  <b-th>Vietnamese</b-th>
+                  <b-th>Example</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody>
+                <b-tr v-if="status[5] == true">
+                  <b-td stacked-heading="Japanese">{{ vocabulary[5].japanese }}</b-td>
+                  <b-td stacked-heading="Spell"> {{ vocabulary[5].spell }} </b-td>
+                  <b-td stacked-heading="Vietnamese"> {{ vocabulary[5].vietnamese }} </b-td>
+                  <b-td stacked-heading="Example"> {{ vocabulary[5].example }} </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </b-tab>
+        </b-tabs>
+      </b-card>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -307,11 +435,13 @@ export default {
         { value: 1, text: "Vietnamese" },
       ],
       vocabularyLength: {},
+      deviceType: 1,
     };
   },
 
   mounted() {
     this.fetchVocabulary();
+    this.checkDevice();
   },
 
   methods: {
@@ -384,6 +514,17 @@ export default {
         }
       }
       this.status[day] = !this.status[day];
+    },
+    checkDevice() {
+      const isMobile =
+        /(Android|webOS|iPhone|iPad|iPod|tablet|BlackBerry|Mobile|Windows Phone)/i.test(
+          navigator.userAgent
+        );
+      if (isMobile) {
+        this.deviceType = 2;
+      } else {
+        this.deviceType = 1;
+      }
     },
   },
 };
