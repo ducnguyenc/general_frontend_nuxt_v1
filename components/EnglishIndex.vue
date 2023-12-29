@@ -58,7 +58,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -72,7 +72,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -147,7 +147,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -161,7 +161,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -236,7 +236,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -250,7 +250,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -325,7 +325,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -339,7 +339,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -410,7 +410,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -424,7 +424,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -503,7 +503,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -517,7 +517,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -595,7 +595,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -609,7 +609,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -687,7 +687,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -701,7 +701,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -779,7 +779,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -793,7 +793,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
@@ -867,7 +867,7 @@
                   </p>
                   <input v-if="[1].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(spell)="data">
@@ -881,7 +881,7 @@
                   </p>
                   <input v-if="[0].includes(data.item.status) && !isShowTable" type="text" @input="(event) =>
                   (data.item.status =
-                    event.target.value == data.value ? 2 : data.item.status)
+                    data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
                 <template #cell(action)="data">
