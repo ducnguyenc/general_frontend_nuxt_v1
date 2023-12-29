@@ -57,7 +57,7 @@
 </template>
 <style>
 .navbar {
-  background-color: red;
+  background-color: cadetblue;
 }
 
 .navbar-dark .navbar-nav .nav-link {

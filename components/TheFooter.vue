@@ -44,8 +44,8 @@ export default {
   bottom: 24px;
   width: 100%;
   color: white;
-  background-color: red;
-  border-top: 1px solid red;
+  background-color: cadetblue;
+  border-top: 1px solid cadetblue;
   text-align: center;
 }
 .footer {
@@ -55,6 +55,6 @@ export default {
   width: 100%;
   color: white;
   text-align: center;
-  background-color: red;
+  background-color: cadetblue;
 }
 </style>

@@ -178,7 +178,7 @@ export default {
   .aaa {
     width: 100vw;
     height: 100vh;
-    background-image: url("../static/dthy.jpg");
+    /* background-image: url("../static/dthy.jpg"); */
     background-size: contain;
   }
 }
@@ -187,7 +187,7 @@ export default {
   .aaa {
     width: 100vw;
     height: 100vh;
-    background-image: url("../static/dthy.jpg");
+    /* background-image: url("../static/dthy.jpg"); */
     background-size: contain;
   }
 }

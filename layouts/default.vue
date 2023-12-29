@@ -11,7 +11,7 @@
   .abc {
     width: 100vw;
     height: 100vh;
-    background-image: url("../static/a.jpg");
+    /* background-image: url("../static/a.jpg"); */
     background-size: cover;
   }
 }
@@ -20,7 +20,7 @@
   .abc {
     width: 100vw;
     height: 100vh;
-    background-image: url("../static/c.jpg");
+    /* background-image: url("../static/c.jpg"); */
     background-size: cover;
   }
 }
