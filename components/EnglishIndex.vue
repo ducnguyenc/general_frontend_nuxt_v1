@@ -61,6 +61,11 @@
                     data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
+                <template #cell(part_of_speech)="data">
+                  <p v-if="[0, 2].includes(data.item.status) || isShowTable">
+                    {{ data.value }}
+                  </p>
+                </template>
                 <template #cell(spell)="data">
                   <p v-if="[0, 2].includes(data.item.status) || isShowTable">
                     {{ data.value }}
@@ -921,6 +926,7 @@ export default {
         { key: "selected" },
         { key: "index" },
         { key: "english" },
+        { key: "part_of_speech" },
         { key: "spell" },
         { key: "vietnamese" },
         { key: "example" },
