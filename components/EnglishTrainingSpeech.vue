@@ -17,8 +17,7 @@
                 <b-button size="xs" type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
-                <b-form-select v-model="selected[1]" :options="selects" value="null"
-                  @change="genVocabulary(dayFirst, 1)"></b-form-select>
+                <b-form-select v-model="selected[1]" :options="selects" value="null"></b-form-select>
               </div>
             </b-form>
 
