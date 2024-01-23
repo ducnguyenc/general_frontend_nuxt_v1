@@ -443,8 +443,8 @@ export default {
       },
       selects: [
         { value: null, text: "Shuffer" },
-        { value: 0, text: "English" },
-        { value: 1, text: "Vietnamese" },
+        { value: 0, text: "Sentence" },
+        { value: 1, text: "English" },
       ],
       vocabularyLength: {},
       deviceType: 1,
@@ -483,12 +483,13 @@ export default {
       if (vocabularyDay.length == 0) {
         this.wordShow[day] = "hết mất tiêu";
       } else {
-        this.statusWord[day] = 1
-        // this.selected[day] ?? Math.floor(Math.random() * 2);
+        this.statusWord[day] =
+          this.selected[day] ?? Math.floor(Math.random() * 2);
+        console.log(this.statusWord[day]);
         if (this.statusWord[day] == 0) {
           this.test = 3;
-          this.wordShow[day] = vocabularyDay[0]["english"];
-          this.wordHide[day] = vocabularyDay[0]["vietnamese"];
+          this.wordShow[day] = vocabularyDay[0]["example"];
+          this.wordHide[day] = vocabularyDay[0]["english"];
         } else {
           this.test = 4;
           this.wordShow[day] = vocabularyDay[0]["vietnamese"];
