@@ -11,13 +11,14 @@
               <div class="d-flex">
                 <span hidden>{{ test }}</span>
                 <label v-if="status[1]" :class="`mr-sm-2 font-weight-bold ` + color">{{
-                  wordHide[1] + ', ' + wordShow[1]
+                  wordShow[1]
                 }}</label>
                 <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[1]"></b-form-input>
                 <b-button size="xs" type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
                 <b-form-select v-model="selected[1]" :options="selects" value="null"></b-form-select>
+                <b-form-input class="mb-2 mr-sm-2 mb-sm-0" v-model="length[1]"></b-form-input>
               </div>
             </b-form>
 
@@ -47,15 +48,15 @@
               </div>
               <div class="d-flex">
                 <span hidden>{{ test }}</span>
-                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                <label v-if="status[2]" :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[2]
                 }}</label>
                 <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[2]"></b-form-input>
                 <b-button type="submit" variant="primary">Submit</b-button>
               </div>
               <div>
-                <b-form-select v-model="selected[2]" :options="selects" value="null"
-                  @change="genVocabulary(daySecond, 2)"></b-form-select>
+                <b-form-select v-model="selected[2]" :options="selects" value="null"></b-form-select>
+                <b-form-input class="mb-2 mr-sm-2 mb-sm-0" v-model="length[2]"></b-form-input>
               </div>
             </b-form>
 
@@ -85,7 +86,7 @@
               </div>
               <div class="d-flex">
                 <span hidden>{{ test }}</span>
-                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                <label v-if="status[3]" :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[3]
                 }}</label>
                 <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[3]"></b-form-input>
@@ -123,7 +124,7 @@
               </div>
               <div class="d-flex">
                 <span hidden>{{ test }}</span>
-                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                <label v-if="status[4]" :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[4]
                 }}</label>
                 <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[4]"></b-form-input>
@@ -161,7 +162,7 @@
               </div>
               <div class="d-flex">
                 <span hidden>{{ test }}</span>
-                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                <label v-if="status[5]" :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[5]
                 }}</label>
                 <b-form-input class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[5]"></b-form-input>
@@ -205,7 +206,7 @@
               </div>
               <div class="d-flex">
                 <span hidden>{{ test }}</span>
-                <label :class="`mr-sm-2 font-weight-bold ` + color">{{
+                <label v-if="status[1]" :class="`mr-sm-2 font-weight-bold ` + color">{{
                   wordShow[1]
                 }}</label>
                 <b-form-input size="xs" class="mb-2 mr-sm-2 mb-sm-0" autofocus v-model="text[1]"></b-form-input>
@@ -442,11 +443,25 @@ export default {
       selects: [
         { value: null, text: "Shuffer" },
         { value: 0, text: "Sentence" },
-        { value: 1, text: "English" },
+        { value: 1, text: "Vocabulary" },
       ],
       vocabularyLength: {},
       deviceType: 1,
-      isSound: false,
+      isSound: {
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+      },
+      day_input: '',
+      length: {
+        1: null,
+        2: null,
+        3: null,
+        4: null,
+        5: null,
+      },
     };
   },
 
@@ -495,21 +510,45 @@ export default {
         }
         this.vocabulary[day] = vocabularyDay[0];
         this.test = 5;
-        if (day == 1) {
-          let wordAudio = this.statusWord[day] ? this.wordHide[day] : this.wordShow[day]
-          new Audio('https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=' + wordAudio).play();
+
+        let wordAudio = this.statusWord[day] ? this.wordHide[day] : this.wordShow[day]
+        if (this.selected[day] == 0 && this.length[day] > 0) {
+          const arrWordAudio = wordAudio.toLowerCase().split(" ");
+          const length = arrWordAudio.length
+          const position = arrWordAudio.indexOf(vocabularyDay[0]["english"].toLowerCase());
+
+          wordAudio = ''
+          if ((length - position) < this.length[day]) {
+            let number = (length - position) - this.length[day] - Math.floor(Math.random() * (length - position)) + position;
+            for (let i = number; i < (number + Number(this.length[day])); i++) {
+              wordAudio = wordAudio + ' ' + arrWordAudio[i]
+            }
+          } if (position < this.length[day]) {
+            for (let i = 0; i < Number(this.length[day]); i++) {
+              wordAudio = wordAudio + ' ' + arrWordAudio[i]
+            }
+          } else {
+            let number = position - Math.floor(Math.random() * Number(this.length[day]));
+            for (let i = number; i < (number + Number(this.length[day])); i++) {
+              wordAudio = wordAudio + ' ' + arrWordAudio[i]
+            }
+          }
         }
+        new Audio('https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=' + wordAudio).play();
       }
     },
     onsubmit(event, vocabularyDay, day) {
       event.preventDefault();
-      if (!this.isSound) {
-        this.genVocabulary(this.dayFirst, 1);
-        this.genVocabulary(this.daySecond, 2);
-        this.genVocabulary(this.dayThird, 3);
-        this.genVocabulary(this.dayFourth, 4);
-        this.genVocabulary(this.dayFiveth, 5);
-        this.isSound = !this.isSound
+      if (!this.isSound[day]) {
+        let vocabularies = {
+          1: this.dayFirst,
+          2: this.daySecond,
+          3: this.dayThird,
+          4: this.dayFourth,
+          5: this.dayFiveth,
+        }
+        this.genVocabulary(vocabularies[day], day);
+        this.isSound[day] = !this.isSound[day]
         return
       }
       if (this.status[day]) {
