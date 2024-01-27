@@ -502,7 +502,7 @@ export default {
         if (this.statusWord[day] == 0) {
           this.test = 3;
           this.wordShow[day] = vocabularyDay[0]["example"];
-          this.wordHide[day] = vocabularyDay[0]["english"];
+          this.wordHide[day] = vocabularyDay[0]["example"];
         } else {
           this.test = 4;
           this.wordShow[day] = vocabularyDay[0]["vietnamese"];
@@ -523,7 +523,7 @@ export default {
             for (let i = number; i < (number + Number(this.length[day])); i++) {
               wordAudio = wordAudio + ' ' + arrWordAudio[i]
             }
-          } if (position < this.length[day]) {
+          } else if (position < this.length[day]) {
             for (let i = 0; i < Number(this.length[day]); i++) {
               wordAudio = wordAudio + ' ' + arrWordAudio[i]
             }
