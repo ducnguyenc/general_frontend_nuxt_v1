@@ -80,6 +80,9 @@
                     data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
+                <template #cell(image)="data">
+                  {{ data.value }}
+                </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
                     <b-icon icon="pencil"></b-icon>
@@ -168,6 +171,9 @@
                   (data.item.status =
                     data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
+                </template>
+                <template #cell(image)="data">
+                  {{ data.value }}
                 </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
@@ -258,6 +264,9 @@
                     data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
+                <template #cell(image)="data">
+                  {{ data.value }}
+                </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
                     <b-icon icon="pencil"></b-icon>
@@ -347,6 +356,9 @@
                     data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
                 </template>
+                <template #cell(image)="data">
+                  {{ data.value }}
+                </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
                     <b-icon icon="pencil"></b-icon>
@@ -431,6 +443,9 @@
                   (data.item.status =
                     data.value.split(',').includes(event.target.value) ? 2 : data.item.status)
                     " />
+                </template>
+                <template #cell(image)="data">
+                  {{ data.value }}
                 </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
@@ -930,6 +945,7 @@ export default {
         { key: "spell" },
         { key: "vietnamese" },
         { key: "example" },
+        { key: "image" },
         { key: "action" },
       ],
       dayFirst: [],
