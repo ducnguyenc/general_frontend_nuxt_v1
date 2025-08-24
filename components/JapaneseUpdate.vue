@@ -44,20 +44,24 @@ export default {
   methods: {
     async fetchSomething() {
       const response = await this.$axios.$get(
-        "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + this.$route.params.id
+        "http://localhost:8080/api/japanese/vocabulary/" + this.$route.params.id
       );
       this.form = response;
     },
     async onSubmit(event) {
       event.preventDefault();
       // const response = await this.$axios.$put(
-      //   "https://laravel-general.000webhostapp.com/api/japanese/vocabulary/" + this.$route.params.id,
+      //   "http://localhost:8080/api/japanese/vocabulary/" + this.$route.params.id,
       //   this.form
       // );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/japanese/vocabulary/update/" + this.$route.params.id, {
+      const response = await fetch("http://localhost:8080/api/japanese/vocabulary/update/" + this.$route.params.id, {
         method: "POST",
         body: JSON.stringify(this.form),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
 
       if (response) {

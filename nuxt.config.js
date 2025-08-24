@@ -45,7 +45,11 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
   },
 
   // Bootstrap https://go.nuxtjs.dev/bootstrap

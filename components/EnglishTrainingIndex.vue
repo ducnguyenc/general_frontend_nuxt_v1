@@ -459,7 +459,7 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary",
+        "http://localhost:8080/api/english/vocabulary",
         {
           params: {
             status_shuffle: this.statusShuffle,

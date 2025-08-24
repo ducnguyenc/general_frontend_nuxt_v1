@@ -13,6 +13,9 @@
           <b-nav-item to="/english_training">English Training</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
+          <b-nav-item to="/english_image">English Image</b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav>
           <b-nav-item to="/english_training/speech">English Training Speech</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>

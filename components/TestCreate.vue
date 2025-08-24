@@ -51,7 +51,7 @@
       async onSubmit(event) {
         event.preventDefault();
         const response = await this.$axios.$post(
-          "https://laravel-general.000webhostapp.com/api/english/vocabulary",
+          "http://localhost:8080/api/english/vocabulary",
           this.form
         );
         if (response) {

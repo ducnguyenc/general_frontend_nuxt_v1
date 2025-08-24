@@ -61,13 +61,17 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       // const response = await this.$axios.$post(
-      //   "https://laravel-general.000webhostapp.com/api/japanese/vocabulary",
+      //   "http://localhost:8080/api/japanese/vocabulary",
       //   this.form
       // );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/japanese/vocabulary", {
+      const response = await fetch("http://localhost:8080/api/japanese/vocabulary", {
         method: "POST",
         body: JSON.stringify(this.form),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
 
       if (response) {

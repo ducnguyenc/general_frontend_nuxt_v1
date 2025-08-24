@@ -28,11 +28,66 @@
       </b-form-group>
 
       <b-form-group id="input-group-4" label="Image:" label-for="input-4">
-        <b-form-input
-          id="input-2"
-          v-model="form.image"
-          placeholder="Image"
-        ></b-form-input>
+        <div class="mb-2">
+          <b-button-group>
+            <b-button 
+              :variant="imageMode === 'file' ? 'primary' : 'outline-primary'" 
+              @click="imageMode = 'file'"
+              size="sm"
+            >
+              Upload File
+            </b-button>
+            <b-button 
+              :variant="imageMode === 'string' ? 'primary' : 'outline-primary'" 
+              @click="imageMode = 'string'"
+              size="sm"
+            >
+              Input String
+            </b-button>
+          </b-button-group>
+        </div>
+        
+        <!-- File Upload Mode -->
+        <div v-if="imageMode === 'file'">
+          <b-form-file
+            id="input-4"
+            v-model="imageFile"
+            placeholder="Choose an image file..."
+            drop-placeholder="Drop image here..."
+            accept="image/*"
+            @change="handleImageChange"
+          ></b-form-file>
+          <small class="form-text text-muted">Select an image file (JPG, PNG, GIF, etc.)</small>
+          
+          <!-- Image Preview 150x150 căn trái -->
+          <div v-if="form.image" class="mt-2">
+            <img 
+              :src="form.image" 
+              alt="Preview" 
+              style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ddd;"
+            />
+          </div>
+        </div>
+        
+        <!-- String Input Mode -->
+        <div v-if="imageMode === 'string'">
+          <b-form-input
+            id="input-4-string"
+            v-model="form.image"
+            placeholder="Enter image URL (e.g., https://example.com/image.jpg) or base64 string"
+            type="text"
+          ></b-form-input>
+          <small class="form-text text-muted">Enter image URL (e.g., https://example.com/image.jpg) or base64 string</small>
+          
+          <!-- Image Preview 150x150 căn trái -->
+          <div v-if="form.image" class="mt-2">
+            <img 
+              :src="form.image" 
+              alt="Preview" 
+              style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ddd;"
+            />
+          </div>
+        </div>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -54,6 +109,8 @@ export default {
         example: "",
         image: "",
       },
+      imageFile: null,
+      imageMode: 'string', // Default to string input mode
     };
   },
   mounted() {
@@ -62,21 +119,40 @@ export default {
   methods: {
     async fetchSomething() {
       const response = await this.$axios.$get(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + this.$route.params.id
+        "http://localhost:8080/api/english/vocabulary/" + this.$route.params.id
       );
 
       this.form = response;
     },
+    
+    handleImageChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.convertToBase64(file);
+      }
+    },
+    
+    convertToBase64(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.form.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
     async onSubmit(event) {
       event.preventDefault();
       // const response = await this.$axios.$put(
-      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + this.$route.params.id,
+      //   "http://localhost:8080/api/english/vocabulary/" + this.$route.params.id,
       //   this.form
       // );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/update/" + this.$route.params.id, {
-        method: "POST",
+      const response = await fetch("http://localhost:8080/api/english/vocabulary/" + this.$route.params.id, {
+        method: "PUT",
         body: JSON.stringify(this.form),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
 
       if (response) {
@@ -89,6 +165,7 @@ export default {
       this.form.vietnamese = "";
       this.form.example = "";
       this.form.image = "";
+      this.imageFile = null;
     },
   },
 };

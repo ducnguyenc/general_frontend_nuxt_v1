@@ -53,14 +53,14 @@ export default {
   methods: {
     async fetchSomething() {
       const response = await this.$axios.$get(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + this.$route.params.id
+        "http://localhost:8080/api/english/vocabulary/" + this.$route.params.id
       );
       this.form = response;
     },
     async onSubmit(event) {
       event.preventDefault();
       const response = await this.$axios.$put(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + this.$route.params.id,
+        "http://localhost:8080/api/english/vocabulary/" + this.$route.params.id,
         this.form
       );
       if (response) {

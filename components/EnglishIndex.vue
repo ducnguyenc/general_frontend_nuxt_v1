@@ -81,7 +81,14 @@
                     " />
                 </template>
                 <template #cell(image)="data">
-                  {{ data.value }}
+                  <div v-if="data.value">
+                    <img 
+                      :src="data.value" 
+                      alt="Vocabulary Image" 
+                      style="max-width: 150px; max-height: 150px;"
+                    />
+                  </div>
+                  <span v-else class="text-muted">No image</span>
                 </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
@@ -173,7 +180,14 @@
                     " />
                 </template>
                 <template #cell(image)="data">
-                  {{ data.value }}
+                  <div v-if="data.value">
+                    <img 
+                      :src="data.value" 
+                      alt="Vocabulary Image" 
+                      style="max-width: 80px; max-height: 60px;"
+                    />
+                  </div>
+                  <span v-else class="text-muted">No image</span>
                 </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
@@ -265,7 +279,14 @@
                     " />
                 </template>
                 <template #cell(image)="data">
-                  {{ data.value }}
+                  <div v-if="data.value">
+                    <img 
+                      :src="data.value" 
+                      alt="Vocabulary Image" 
+                      style="max-width: 80px; max-height: 60px;"
+                    />
+                  </div>
+                  <span v-else class="text-muted">No image</span>
                 </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
@@ -357,7 +378,14 @@
                     " />
                 </template>
                 <template #cell(image)="data">
-                  {{ data.value }}
+                  <div v-if="data.value">
+                    <img 
+                      :src="data.value" 
+                      alt="Vocabulary Image" 
+                      style="max-width: 80px; max-height: 60px;"
+                    />
+                  </div>
+                  <span v-else class="text-muted">No image</span>
                 </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
@@ -445,7 +473,14 @@
                     " />
                 </template>
                 <template #cell(image)="data">
-                  {{ data.value }}
+                  <div v-if="data.value">
+                    <img 
+                      :src="data.value" 
+                      alt="Vocabulary Image" 
+                      style="max-width: 80px; max-height: 60px;"
+                    />
+                  </div>
+                  <span v-else class="text-muted">No image</span>
                 </template>
                 <template #cell(action)="data">
                   <b-button v-if="!isShowAction" :to="`/english/` + data.item.id + `/update`">
@@ -965,11 +1000,15 @@ export default {
   methods: {
     async fetchVocabulary() {
       const response = await this.$axios.$get(
-        "https://laravel-general.000webhostapp.com/api/english/vocabulary",
+        "http://localhost:8080/api/english/vocabulary",
         {
           params: {
             status_shuffle: this.statusShuffle,
           },
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
         }
       );
       this.dayFirst = response[1];
@@ -986,11 +1025,15 @@ export default {
 
     async deleteVocabulary(id) {
       // const response = await this.$axios.$delete(
-      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/" + id
+      //   "http://localhost:8080/api/english/vocabulary/" + id
       // );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/destroy/" + id, {
-        method: "GET",
+      const response = await fetch("http://localhost:8080/api/english/vocabulary/" + id, {
+        method: "DELETE",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
 
       if (response) {
@@ -1000,13 +1043,17 @@ export default {
 
     async deleteAllVocabulary() {
       // const response = await this.$axios.$post(
-      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/delete",
+      //   "http://localhost:8080/api/english/vocabulary/delete",
       //   this.selected
       // );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/delete", {
+      const response = await fetch("http://localhost:8080/api/english/vocabulary/delete", {
         method: "POST",
         body: JSON.stringify(this.selected),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
 
       if (response) {
@@ -1016,13 +1063,17 @@ export default {
 
     async next() {
       // const response = await this.$axios.$post(
-      //   "https://laravel-general.000webhostapp.com/api/english/vocabulary/forward",
+      //   "http://localhost:8080/api/english/vocabulary/forward",
       //   this.selected
       // );
 
-      const response = await fetch("https://laravel-general.000webhostapp.com/api/english/vocabulary/forward", {
+      const response = await fetch("http://localhost:8080/api/english/vocabulary/forward", {
         method: "POST",
         body: JSON.stringify(this.selected),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
 
       if (response) {
