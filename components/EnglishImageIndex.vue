@@ -8,56 +8,7 @@
               <h5>English Image Training - Day 1</h5>
             </b-card-header>
             <b-card-body>
-              <b-table 
-                :fields="fields" 
-                :items="dayFirst" 
-                bordered 
-                striped 
-                hover
-                responsive
-              >
-                <template #cell(image)="data">
-                  <div v-if="data.value" class="text-center">
-                    <img 
-                      :src="data.value" 
-                      alt="Vocabulary Image" 
-                      style="max-width: 150px; max-height: 150px;"
-                    />
-                  </div>
-                  <span v-else class="text-muted">No image</span>
-                </template>
-
-                <template #cell(english)="data">
-                  <b-form-input
-                    v-model="userInputs[data.index]"
-                    :class="{
-                      'is-valid': isCorrect[data.index] === true,
-                      'is-invalid': isCorrect[data.index] === false
-                    }"
-                    @keyup.enter="checkAnswer(data.index, data.item.english)"
-                    placeholder="Enter English word..."
-                    size="sm"
-                  />
-                </template>
-
-                <template #cell(part_of_speech)="data">
-                  <div 
-                    v-if="showAnswer[data.index]"
-                    :class="{
-                      'text-success': isCorrect[data.index],
-                      'text-muted': !isCorrect[data.index]
-                    }"
-                    class="font-weight-bold"
-                  >
-                    {{ data.item.part_of_speech }}
-                  </div>
-                  <div v-else class="text-muted">
-                    ---
-                  </div>
-                </template>
-              </b-table>
-
-              <div class="mt-3 d-flex justify-content-between align-items-center">
+              <div class="mb-3 d-flex justify-content-between align-items-center">
                 <div>
                   <strong>Score: {{ correctAnswersDay1 }}/{{ dayFirst.length }}</strong>
                 </div>
@@ -70,55 +21,33 @@
                   </b-button>
                 </div>
               </div>
-            </b-card-body>
-          </b-tab>
+              <b-table :fields="fields" :items="dayFirst" bordered striped hover responsive>
+                <template #cell(no)="data">
+                  <span class="font-weight-bold">{{ data.index + 1 }}</span>
+                </template>
 
-          <b-tab title="Day 2">
-            <b-card-header>
-              <h5>English Image Training - Day 2</h5>
-            </b-card-header>
-            <b-card-body>
-              <b-table 
-                :fields="fields" 
-                :items="daySecond" 
-                bordered 
-                striped 
-                hover
-                responsive
-              >
                 <template #cell(image)="data">
                   <div v-if="data.value" class="text-center">
-                    <img 
-                      :src="data.value" 
-                      alt="Vocabulary Image" 
-                      style="max-width: 150px; max-height: 150px;"
-                    />
+                    <img :src="data.value" alt="Vocabulary Image"
+                      style="max-width: 150px; max-height: 150px; cursor: pointer;"
+                      @click="playAudio(data.item.english)" class="img-thumbnail" />
                   </div>
                   <span v-else class="text-muted">No image</span>
                 </template>
 
                 <template #cell(english)="data">
-                  <b-form-input
-                    v-model="userInputs[data.index]"
-                    :class="{
-                      'is-valid': isCorrect[data.index] === true,
-                      'is-invalid': isCorrect[data.index] === false
-                    }"
-                    @keyup.enter="checkAnswer(data.index, data.item.english)"
-                    placeholder="Enter English word..."
-                    size="sm"
-                  />
+                  <b-form-input v-model="userInputs[data.index]" :class="{
+                    'is-valid': isCorrect[data.index] === true,
+                    'is-invalid': isCorrect[data.index] === false
+                  }" @keyup.enter="checkAnswer(data.index, data.item.english)" placeholder="Enter English word..."
+                    size="sm" />
                 </template>
 
                 <template #cell(part_of_speech)="data">
-                  <div 
-                    v-if="showAnswer[data.index]"
-                    :class="{
-                      'text-success': isCorrect[data.index],
-                      'text-muted': !isCorrect[data.index]
-                    }"
-                    class="font-weight-bold"
-                  >
+                  <div v-if="showAnswer[data.index]" :class="{
+                    'text-success': isCorrect[data.index],
+                    'text-muted': !isCorrect[data.index]
+                  }" class="font-weight-bold">
                     {{ data.item.part_of_speech }}
                   </div>
                   <div v-else class="text-muted">
@@ -127,7 +56,16 @@
                 </template>
               </b-table>
 
-              <div class="mt-3 d-flex justify-content-between align-items-center">
+
+            </b-card-body>
+          </b-tab>
+
+          <b-tab title="Day 2">
+            <b-card-header>
+              <h5>English Image Training - Day 2</h5>
+            </b-card-header>
+            <b-card-body>
+              <div class="mb-3 d-flex justify-content-between align-items-center">
                 <div>
                   <strong>Score: {{ correctAnswersDay2 }}/{{ daySecond.length }}</strong>
                 </div>
@@ -140,6 +78,42 @@
                   </b-button>
                 </div>
               </div>
+              <b-table :fields="fields" :items="daySecond" bordered striped hover responsive>
+                <template #cell(image)="data">
+                  <div v-if="data.value" class="text-center">
+                    <img :src="data.value" alt="Vocabulary Image"
+                      style="max-width: 150px; max-height: 150px; cursor: pointer;"
+                      @click="playAudio(data.item.english)" class="img-thumbnail" />
+                  </div>
+                  <span v-else class="text-muted">No image</span>
+                </template>
+
+                <template #cell(no)="data">
+                  <span class="font-weight-bold">{{ data.index + 1 }}</span>
+                </template>
+
+                <template #cell(english)="data">
+                  <b-form-input v-model="userInputs[data.index]" :class="{
+                    'is-valid': isCorrect[data.index] === true,
+                    'is-invalid': isCorrect[data.index] === false
+                  }" @keyup.enter="checkAnswer(data.index, data.item.english)" placeholder="Enter English word..."
+                    size="sm" />
+                </template>
+
+                <template #cell(part_of_speech)="data">
+                  <div v-if="showAnswer[data.index]" :class="{
+                    'text-success': isCorrect[data.index],
+                    'text-muted': !isCorrect[data.index]
+                  }" class="font-weight-bold">
+                    {{ data.item.part_of_speech }}
+                  </div>
+                  <div v-else class="text-muted">
+                    ---
+                  </div>
+                </template>
+              </b-table>
+
+
             </b-card-body>
           </b-tab>
 
@@ -148,47 +122,33 @@
               <h5>English Image Training - Day 3</h5>
             </b-card-header>
             <b-card-body>
-              <b-table 
-                :fields="fields" 
-                :items="dayThird" 
-                bordered 
-                striped 
-                hover
-                responsive
-              >
+              <b-table :fields="fields" :items="dayThird" bordered striped hover responsive>
                 <template #cell(image)="data">
                   <div v-if="data.value" class="text-center">
-                    <img 
-                      :src="data.value" 
-                      alt="Vocabulary Image" 
-                      style="max-width: 150px; max-height: 150px;"
-                    />
+                    <img :src="data.value" alt="Vocabulary Image"
+                      style="max-width: 150px; max-height: 150px; cursor: pointer;"
+                      @click="playAudio(data.item.english)" class="img-thumbnail" />
                   </div>
                   <span v-else class="text-muted">No image</span>
                 </template>
 
+                <template #cell(no)="data">
+                  <span class="font-weight-bold">{{ data.index + 1 }}</span>
+                </template>
+
                 <template #cell(english)="data">
-                  <b-form-input
-                    v-model="userInputs[data.index]"
-                    :class="{
-                      'is-valid': isCorrect[data.index] === true,
-                      'is-invalid': isCorrect[data.index] === false
-                    }"
-                    @keyup.enter="checkAnswer(data.index, data.item.english)"
-                    placeholder="Enter English word..."
-                    size="sm"
-                  />
+                  <b-form-input v-model="userInputs[data.index]" :class="{
+                    'is-valid': isCorrect[data.index] === true,
+                    'is-invalid': isCorrect[data.index] === false
+                  }" @keyup.enter="checkAnswer(data.index, data.item.english)" placeholder="Enter English word..."
+                    size="sm" />
                 </template>
 
                 <template #cell(part_of_speech)="data">
-                  <div 
-                    v-if="showAnswer[data.index]"
-                    :class="{
-                      'text-success': isCorrect[data.index],
-                      'text-muted': !isCorrect[data.index]
-                    }"
-                    class="font-weight-bold"
-                  >
+                  <div v-if="showAnswer[data.index]" :class="{
+                    'text-success': isCorrect[data.index],
+                    'text-muted': !isCorrect[data.index]
+                  }" class="font-weight-bold">
                     {{ data.item.part_of_speech }}
                   </div>
                   <div v-else class="text-muted">
@@ -196,20 +156,6 @@
                   </div>
                 </template>
               </b-table>
-
-              <div class="mt-3 d-flex justify-content-between align-items-center">
-                <div>
-                  <strong>Score: {{ correctAnswersDay3 }}/{{ dayThird.length }}</strong>
-                </div>
-                <div>
-                  <b-button @click="resetGame(3)" variant="secondary" size="sm" class="mr-2">
-                    Reset
-                  </b-button>
-                  <b-button @click="showAllAnswers(3)" variant="info" size="sm">
-                    Show All Answers
-                  </b-button>
-                </div>
-              </div>
             </b-card-body>
           </b-tab>
 
@@ -218,56 +164,7 @@
               <h5>English Image Training - Day 4</h5>
             </b-card-header>
             <b-card-body>
-              <b-table 
-                :fields="fields" 
-                :items="dayFourth" 
-                bordered 
-                striped 
-                hover
-                responsive
-              >
-                <template #cell(image)="data">
-                  <div v-if="data.value" class="text-center">
-                    <img 
-                      :src="data.value" 
-                      alt="Vocabulary Image" 
-                      style="max-width: 150px; max-height: 150px;"
-                    />
-                  </div>
-                  <span v-else class="text-muted">No image</span>
-                </template>
-
-                <template #cell(english)="data">
-                  <b-form-input
-                    v-model="userInputs[data.index]"
-                    :class="{
-                      'is-valid': isCorrect[data.index] === true,
-                      'is-invalid': isCorrect[data.index] === false
-                    }"
-                    @keyup.enter="checkAnswer(data.index, data.item.english)"
-                    placeholder="Enter English word..."
-                    size="sm"
-                  />
-                </template>
-
-                <template #cell(part_of_speech)="data">
-                  <div 
-                    v-if="showAnswer[data.index]"
-                    :class="{
-                      'text-success': isCorrect[data.index],
-                      'text-muted': !isCorrect[data.index]
-                    }"
-                    class="font-weight-bold"
-                  >
-                    {{ data.item.part_of_speech }}
-                  </div>
-                  <div v-else class="text-muted">
-                    ---
-                  </div>
-                </template>
-              </b-table>
-
-              <div class="mt-3 d-flex justify-content-between align-items-center">
+              <div class="mb-3 d-flex justify-content-between align-items-center">
                 <div>
                   <strong>Score: {{ correctAnswersDay4 }}/{{ dayFourth.length }}</strong>
                 </div>
@@ -280,55 +177,33 @@
                   </b-button>
                 </div>
               </div>
-            </b-card-body>
-          </b-tab>
-
-          <b-tab title="Day 5">
-            <b-card-header>
-              <h5>English Image Training - Day 5</h5>
-            </b-card-header>
-            <b-card-body>
-              <b-table 
-                :fields="fields" 
-                :items="dayFiveth" 
-                bordered 
-                striped 
-                hover
-                responsive
-              >
+              <b-table :fields="fields" :items="dayFourth" bordered striped hover responsive>
                 <template #cell(image)="data">
                   <div v-if="data.value" class="text-center">
-                    <img 
-                      :src="data.value" 
-                      alt="Vocabulary Image" 
-                      style="max-width: 150px; max-height: 150px;"
-                    />
+                    <img :src="data.value" alt="Vocabulary Image"
+                      style="max-width: 150px; max-height: 150px; cursor: pointer;"
+                      @click="playAudio(data.item.english)" class="img-thumbnail" />
                   </div>
                   <span v-else class="text-muted">No image</span>
                 </template>
 
+                <template #cell(no)="data">
+                  <span class="font-weight-bold">{{ data.index + 1 }}</span>
+                </template>
+
                 <template #cell(english)="data">
-                  <b-form-input
-                    v-model="userInputs[data.index]"
-                    :class="{
-                      'is-valid': isCorrect[data.index] === true,
-                      'is-invalid': isCorrect[data.index] === false
-                    }"
-                    @keyup.enter="checkAnswer(data.index, data.item.english)"
-                    placeholder="Enter English word..."
-                    size="sm"
-                  />
+                  <b-form-input v-model="userInputs[data.index]" :class="{
+                    'is-valid': isCorrect[data.index] === true,
+                    'is-invalid': isCorrect[data.index] === false
+                  }" @keyup.enter="checkAnswer(data.index, data.item.english)" placeholder="Enter English word..."
+                    size="sm" />
                 </template>
 
                 <template #cell(part_of_speech)="data">
-                  <div 
-                    v-if="showAnswer[data.index]"
-                    :class="{
-                      'text-success': isCorrect[data.index],
-                      'text-muted': !isCorrect[data.index]
-                    }"
-                    class="font-weight-bold"
-                  >
+                  <div v-if="showAnswer[data.index]" :class="{
+                    'text-success': isCorrect[data.index],
+                    'text-muted': !isCorrect[data.index]
+                  }" class="font-weight-bold">
                     {{ data.item.part_of_speech }}
                   </div>
                   <div v-else class="text-muted">
@@ -337,7 +212,16 @@
                 </template>
               </b-table>
 
-              <div class="mt-3 d-flex justify-content-between align-items-center">
+
+            </b-card-body>
+          </b-tab>
+
+          <b-tab title="Day 5">
+            <b-card-header>
+              <h5>English Image Training - Day 5</h5>
+            </b-card-header>
+            <b-card-body>
+              <div class="mb-3 d-flex justify-content-between align-items-center">
                 <div>
                   <strong>Score: {{ correctAnswersDay5 }}/{{ dayFiveth.length }}</strong>
                 </div>
@@ -350,6 +234,42 @@
                   </b-button>
                 </div>
               </div>
+              <b-table :fields="fields" :items="dayFiveth" bordered striped hover responsive>
+                <template #cell(image)="data">
+                  <div v-if="data.value" class="text-center">
+                    <img :src="data.value" alt="Vocabulary Image"
+                      style="max-width: 150px; max-height: 150px; cursor: pointer;"
+                      @click="playAudio(data.item.english)" class="img-thumbnail" />
+                  </div>
+                  <span v-else class="text-muted">No image</span>
+                </template>
+
+                <template #cell(no)="data">
+                  <span class="font-weight-bold">{{ data.index + 1 }}</span>
+                </template>
+
+                <template #cell(english)="data">
+                  <b-form-input v-model="userInputs[data.index]" :class="{
+                    'is-valid': isCorrect[data.index] === true,
+                    'is-invalid': isCorrect[data.index] === false
+                  }" @keyup.enter="checkAnswer(data.index, data.item.english)" placeholder="Enter English word..."
+                    size="sm" />
+                </template>
+
+                <template #cell(part_of_speech)="data">
+                  <div v-if="showAnswer[data.index]" :class="{
+                    'text-success': isCorrect[data.index],
+                    'text-muted': !isCorrect[data.index]
+                  }" class="font-weight-bold">
+                    {{ data.item.part_of_speech }}
+                  </div>
+                  <div v-else class="text-muted">
+                    ---
+                  </div>
+                </template>
+              </b-table>
+
+
             </b-card-body>
           </b-tab>
         </b-tabs>
@@ -361,10 +281,11 @@
 <script>
 export default {
   name: "EnglishImageIndex",
-  
+
   data() {
     return {
       fields: [
+        { key: "no", label: "No", thClass: "text-center", tdClass: "text-center align-middle" },
         { key: "image", label: "Image", thClass: "text-center", tdClass: "text-center" },
         { key: "english", label: "English", thClass: "text-center", tdClass: "text-center align-middle" },
         { key: "part_of_speech", label: "Part Of Speech", thClass: "text-center", tdClass: "text-center align-middle" },
@@ -414,28 +335,28 @@ export default {
             }
           }
         );
-        
+
         // Phân chia data theo ngày và chỉ lấy những item có image
         this.dayFirst = (response[1] || [])
           .filter(item => item.image && item.image.trim() !== '')
           .map((item, index) => ({ ...item, index }));
-          
+
         this.daySecond = (response[2] || [])
           .filter(item => item.image && item.image.trim() !== '')
           .map((item, index) => ({ ...item, index: index + this.dayFirst.length }));
-          
+
         this.dayThird = (response[3] || [])
           .filter(item => item.image && item.image.trim() !== '')
           .map((item, index) => ({ ...item, index: index + this.dayFirst.length + this.daySecond.length }));
-          
+
         this.dayFourth = (response[4] || [])
           .filter(item => item.image && item.image.trim() !== '')
           .map((item, index) => ({ ...item, index: index + this.dayFirst.length + this.daySecond.length + this.dayThird.length }));
-          
+
         this.dayFiveth = (response[5] || [])
           .filter(item => item.image && item.image.trim() !== '')
           .map((item, index) => ({ ...item, index: index + this.dayFirst.length + this.daySecond.length + this.dayThird.length + this.dayFourth.length }));
-        
+
         this.initializeGame();
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
@@ -446,7 +367,7 @@ export default {
       this.userInputs = {};
       this.isCorrect = {};
       this.showAnswer = {};
-      
+
       const allItems = [
         ...this.dayFirst,
         ...this.daySecond,
@@ -454,7 +375,7 @@ export default {
         ...this.dayFourth,
         ...this.dayFiveth
       ];
-      
+
       allItems.forEach((item) => {
         this.$set(this.userInputs, item.index, '');
         this.$set(this.isCorrect, item.index, null);
@@ -465,17 +386,19 @@ export default {
     checkAnswer(index, correctAnswer) {
       const userInput = this.userInputs[index].trim().toLowerCase();
       const correct = correctAnswer.toLowerCase();
-      
+
       // Kiểm tra nếu input chứa đáp án đúng (có thể có nhiều từ cách nhau bằng dấu phẩy)
       const possibleAnswers = correct.split(',').map(ans => ans.trim());
-      const isMatch = possibleAnswers.some(answer => 
+      const isMatch = possibleAnswers.some(answer =>
         userInput === answer || userInput.includes(answer)
       );
-      
+
       // Chỉ set isCorrect và showAnswer khi ấn Enter
       if (isMatch) {
         this.$set(this.isCorrect, index, true);
         this.$set(this.showAnswer, index, true);
+        // Play audio when answer is correct
+        this.playAudio(correctAnswer);
       } else {
         this.$set(this.isCorrect, index, false);
         this.$set(this.showAnswer, index, false);
@@ -526,12 +449,20 @@ export default {
     getDayName(dayNumber) {
       const dayNames = {
         1: 'First',
-        2: 'Second', 
+        2: 'Second',
         3: 'Third',
         4: 'Fourth',
         5: 'Fiveth'
       };
       return dayNames[dayNumber];
+    },
+
+    playAudio(text) {
+      try {
+        new Audio('https://translate.google.com.vn/translate_tts?ie=UTF-8&q=' + encodeURIComponent(text) + '&tl=en&client=tw-ob').play();
+      } catch (error) {
+        console.error('Error playing audio:', error);
+      }
     }
   },
 };
